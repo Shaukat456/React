@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lesson 03 — Props & State</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Segoe UI, Roboto, Arial;
+        padding: 20px;
+      }
+      button {
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Counter({ initial = 0 }) {
+        const [count, setCount] = React.useState(initial);
+        return (
+          <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount((c) => c + 1)}>+</button>
+            <button onClick={() => setCount((c) => c - 1)}>-</button>
+            <button onClick={() => setCount(initial)}>reset</button>
+          </div>
+        );
+      }
+
+      function App() {
+        const [a, setA] = React.useState(0);
+        const [b, setB] = React.useState(0);
+
+        return (
+          <div>
+            <h2>Independent Counters</h2>
+            <div style={{ display: "flex", gap: "20px" }}>
+              <Counter initial={a} />
+              <Counter initial={b} />
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

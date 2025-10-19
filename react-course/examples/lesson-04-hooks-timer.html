@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lesson 04 — Hooks: Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Segoe UI, Roboto, Arial;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Timer() {
+        const [seconds, setSeconds] = React.useState(0);
+
+        React.useEffect(() => {
+          const id = setInterval(() => {
+            setSeconds((s) => s + 1);
+          }, 1000);
+          return () => clearInterval(id);
+        }, []);
+
+        return <div>Seconds elapsed: {seconds}</div>;
+      }
+
+      function App() {
+        const [show, setShow] = React.useState(true);
+        return (
+          <div>
+            <button onClick={() => setShow((s) => !s)}>
+              {show ? "Hide" : "Show"} Timer
+            </button>
+            {show && <Timer />}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

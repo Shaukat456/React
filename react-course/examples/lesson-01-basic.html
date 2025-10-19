@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lesson 01 — React basics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Segoe UI, Roboto, Arial;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React, ReactDOM, and Babel from CDN - works without bundler -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // JSX example
+      const name = "Student";
+      const element = <h1>Hello, {name}! Welcome to React.</h1>;
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(element);
+    </script>
+
+    <script type="text/javascript">
+      // non-JSX equivalent
+      // const element = React.createElement('h1', null, 'Hello from createElement');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lesson 02 — Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Segoe UI, Roboto, Arial;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Header() {
+        return (
+          <header>
+            <h1>My App</h1>
+          </header>
+        );
+      }
+
+      function Footer() {
+        return (
+          <footer>
+            <small>© Example</small>
+          </footer>
+        );
+      }
+
+      function Welcome({ name }) {
+        return <p>Hello, {name}!</p>;
+      }
+
+      function App() {
+        return (
+          <div>
+            <Header />
+            <main>
+              <Welcome name="Alice" />
+              <Welcome name="Bob" />
+            </main>
+            <Footer />
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
