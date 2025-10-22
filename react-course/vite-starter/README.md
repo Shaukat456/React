@@ -25,6 +25,8 @@ Included examples
 - `Timer` — `useEffect` with cleanup
 - `FetchUsers` — data fetching with cancellation
 - `ErrorBoundaryDemo` — class error boundary catching child errors
+- `FormWithReducer` — form state managed with `useReducer` (validation + reset)
+- `UndoRedoDemo` — demonstrates undo/redo history pattern with `useReducer`
 
 Notes
 
