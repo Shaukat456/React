@@ -1,5 +1,3 @@
-# KeyTerms
-
 # Why React matters — importance, comparison to vanilla JS, and an ordered topics list
 
 Purpose
