@@ -1,0 +1,16 @@
+body {
+  font-family: Segoe UI, Roboto, Arial;
+  padding: 20px;
+}
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}
+section {
+  border: 1px solid #eee;
+  padding: 12px;
+  margin: 12px 0;
+}
+button {
+  margin-right: 8px;
+}
