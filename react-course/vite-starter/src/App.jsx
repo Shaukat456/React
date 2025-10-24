@@ -18,10 +18,7 @@ export default function App() {
           <h2>Counter</h2>
           <Counter />
         </section>
-        <section>
-          <h2>Timer</h2>
-          <Timer />
-        </section>
+
         <section>
           <h2>Fetch Users</h2>
           <FetchUsers />
