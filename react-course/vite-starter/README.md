@@ -28,6 +28,7 @@ Included examples
 - `FormWithReducer` — form state managed with `useReducer` (validation + reset)
 - `UndoRedoDemo` — demonstrates undo/redo history pattern with `useReducer`
 - `VdomKeysFocusDemo` — Virtual DOM keys demo showing list reorder vs stable keys and focus/state preservation
+- `Dashboard` — integrated demo using: context (theme), reducer for tasks, transitions + deferred search, memoized list items, imperative input ref, layout measurement, error boundary, and lazy-loaded settings
 
 Notes
 
