@@ -176,14 +176,6 @@ Why: Timing matters when coordinating side effects and renders.
 
 ---
 
-If you'd like, I can:
-
-- Add this lesson to the `vite-starter` as a `docs/` page or `src/prereqs.md`,
-- Create runnable code examples and short interactive exercises, or
-- Generate a short quiz to test readiness before moving to React.
-
-Tell me which you'd prefer next.
-
 ```
 
 ```
