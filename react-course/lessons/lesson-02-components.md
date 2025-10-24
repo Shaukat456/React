@@ -49,7 +49,8 @@ Real-world scenarios
 Good practices
 
 - Single responsibility: components should do one job — rendering or orchestrating children.
-- Keep components small and prefer composition over large monolithic components.
+- Keep components small and prefer composition over large monolithic components
+
 - Declare prop shapes clearly (use PropTypes or TypeScript when possible).
 
 Bad practices
