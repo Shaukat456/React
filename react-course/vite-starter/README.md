@@ -27,6 +27,7 @@ Included examples
 - `ErrorBoundaryDemo` — class error boundary catching child errors
 - `FormWithReducer` — form state managed with `useReducer` (validation + reset)
 - `UndoRedoDemo` — demonstrates undo/redo history pattern with `useReducer`
+- `VdomKeysFocusDemo` — Virtual DOM keys demo showing list reorder vs stable keys and focus/state preservation
 
 Notes
 

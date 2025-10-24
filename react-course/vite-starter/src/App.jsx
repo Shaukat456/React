@@ -5,6 +5,7 @@ import FetchUsers from "./components/FetchUsers";
 import ErrorBoundaryDemo from "./components/ErrorBoundaryDemo";
 import FormWithReducer from "./components/FormWithReducer";
 import UndoRedoDemo from "./components/UndoRedoDemo";
+import VdomKeysFocusDemo from "./components/VdomKeysFocusDemo";
 
 export default function App() {
   return (
@@ -33,6 +34,10 @@ export default function App() {
       <section>
         <h2>Undo / Redo (useReducer)</h2>
         <UndoRedoDemo />
+      </section>
+      <section>
+        <h2>Virtual DOM: Keys & Focus Demo</h2>
+        <VdomKeysFocusDemo />
       </section>
     </div>
   );
