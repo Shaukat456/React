@@ -1,171 +1,379 @@
-````markdown
-# Lesson 20 — Custom hooks: design, reuse, testing
+---
+# 🧩 Lesson — Custom Hooks in React (In Depth)
+---
 
-Estimated time: 2–3 hours (read + exercises)
+## 🎯 Learning Objectives
 
-Purpose: Teach how to extract reusable logic into custom hooks, design their API surface, handle side-effects and lifecycle, and test them reliably.
+- Understand **what** custom hooks are and **why** they exist
+- Learn **how** to create and use them
+- Explore **real-world examples** and **best practices**
+- Identify **common mistakes** and how to avoid them
+- Learn **advanced patterns** (composition, context integration, etc.)
 
 ---
 
-## What is a custom hook?
+## ⚙️ 1. What Are Custom Hooks?
 
-- A custom hook is a JavaScript function whose name starts with `use` and that may call other hooks. It extracts reusable stateful logic from components.
+> A **custom hook** is a **JavaScript function** whose name starts with `use` and that **uses one or more React hooks** inside it (`useState`, `useEffect`, `useRef`, etc.) to share logic across components.
 
-Example (simple useLocalStorage hook):
+They allow you to **extract reusable logic** from components — keeping code DRY (Don’t Repeat Yourself) and easier to maintain.
 
-```js
-import { useState, useEffect } from "react";
+---
 
-function useLocalStorage(key, initial) {
-  const [state, setState] = useState(() => {
-    try {
-      const raw = localStorage.getItem(key);
-      return raw ? JSON.parse(raw) : initial;
-    } catch (e) {
-      return initial;
-    }
+## 🧠 2. Why Custom Hooks Exist
+
+Without custom hooks, components often repeat logic.
+
+### ❌ Example — Repeated Logic
+
+Imagine two components that both need to track window width:
+
+```jsx
+function Navbar() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return <div>Navbar width: {width}</div>;
+}
+
+function Sidebar() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return <div>Sidebar width: {width}</div>;
+}
+```
+
+That’s a **lot of duplicated logic**.
+
+---
+
+### ✅ With a Custom Hook
+
+```jsx
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return width;
+}
+
+function Navbar() {
+  const width = useWindowWidth();
+  return <div>Navbar width: {width}</div>;
+}
+
+function Sidebar() {
+  const width = useWindowWidth();
+  return <div>Sidebar width: {width}</div>;
+}
+```
+
+🎉 Now both components share logic through the **custom hook**.
+
+---
+
+## 🪄 3. Analogy — “Cooking Recipe”
+
+Imagine every chef in a restaurant writing their own way to make pasta 🍝.
+They’ll waste time, make mistakes, and produce inconsistent dishes.
+
+Instead, you create **a single recipe** (`useMakePasta`) that everyone follows.
+Custom hooks are **recipes for logic** — reusable and consistent.
+
+---
+
+## ⚡ 4. Key Rule
+
+> **Hooks can only be called:**
+>
+> 1. Inside React function components
+> 2. Inside other custom hooks
+
+They cannot be called conditionally or inside loops.
+
+✅ **Correct:**
+
+```jsx
+function useTimer() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setCount((c) => c + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return count;
+}
+```
+
+❌ **Incorrect:**
+
+```jsx
+if (condition) {
+  useEffect(() => {}); // ❌ can't call hooks conditionally
+}
+```
+
+---
+
+## 🧩 5. Real-World Examples
+
+### 🕒 Example 1: `useLocalStorage`
+
+Store and persist state in local storage.
+
+```jsx
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initialValue;
   });
 
   useEffect(() => {
-    try {
-      localStorage.setItem(key, JSON.stringify(state));
-    } catch (e) {
-      // ignore write errors
-    }
-  }, [key, state]);
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-  return [state, setState];
+  return [value, setValue];
 }
-
-export default useLocalStorage;
 ```
-````
+
+Usage:
+
+```jsx
+const [theme, setTheme] = useLocalStorage("theme", "light");
+```
 
 ---
 
-## Design principles
+### 🧭 Example 2: `useFetch`
 
-- Composition: small focused hooks are easier to test and reuse.
-- API simplicity: prefer returning a minimal, stable API (value + setter or object with methods).
-- Avoid coupling to UI: hooks should not render UI directly.
-- Keep side-effects controlled and predictable (only in useEffect/useLayoutEffect).
+A reusable data-fetching hook.
 
----
+```jsx
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-## Common patterns
-
-- useFetch(url) — fetch + cache + loading/error state
-- useToggle(initial) — boolean toggle utility
-- useDebouncedValue(value, delay) — debounce values for inputs
-- usePrevious(value) — capture previous prop/state value
-
-Example: useDebouncedValue
-
-```js
-import { useState, useEffect } from "react";
-
-function useDebouncedValue(value, delay = 300) {
-  const [debounced, setDebounced] = useState(value);
   useEffect(() => {
-    const id = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(id);
-  }, [value, delay]);
-  return debounced;
-}
+    let isMounted = true;
+    setLoading(true);
 
-export default useDebouncedValue;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => isMounted && setData(data))
+      .catch((err) => isMounted && setError(err))
+      .finally(() => isMounted && setLoading(false));
+
+    return () => (isMounted = false);
+  }, [url]);
+
+  return { data, loading, error };
+}
 ```
 
----
+Usage:
 
-## Testing custom hooks
-
-- Use `@testing-library/react` with `renderHook` from `@testing-library/react-hooks` (or React Testing Library's recommended helpers). Test both happy path and edge cases (errors, cleanup).
-
-Example test (pseudo):
-
-```js
-import { renderHook, act } from "@testing-library/react-hooks";
-import useDebouncedValue from "./useDebouncedValue";
-
-jest.useFakeTimers();
-
-test("debounces value changes", () => {
-  const { result, rerender } = renderHook(
-    ({ value, delay }) => useDebouncedValue(value, delay),
-    {
-      initialProps: { value: "a", delay: 200 },
-    }
+```jsx
+function UserList() {
+  const { data, loading, error } = useFetch("/api/users");
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+  return (
+    <ul>
+      {data.map((u) => (
+        <li key={u.id}>{u.name}</li>
+      ))}
+    </ul>
   );
+}
+```
 
-  expect(result.current).toBe("a");
-  rerender({ value: "ab", delay: 200 });
-  // not updated immediately
-  expect(result.current).toBe("a");
-  act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(result.current).toBe("ab");
+---
+
+### 🕰️ Example 3: `usePrevious`
+
+Store the previous value of a variable.
+
+```jsx
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+```
+
+Usage:
+
+```jsx
+const prevCount = usePrevious(count);
+```
+
+---
+
+## 🧠 6. Composition — Hooks Using Other Hooks
+
+Custom hooks can **combine multiple hooks** to build more complex logic.
+
+```jsx
+function useAuth() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) setUser({ name: "Ali" });
+  }, []);
+
+  const login = (userData) => setUser(userData);
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
+  return { user, login, logout };
+}
+```
+
+---
+
+## ⚙️ 7. Advanced Example — Combine with Context
+
+```jsx
+const AuthContext = createContext();
+
+function AuthProvider({ children }) {
+  const auth = useAuth();
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+}
+
+function useAuthContext() {
+  return useContext(AuthContext);
+}
+```
+
+Now you can use:
+
+```jsx
+const { user, login } = useAuthContext();
+```
+
+✅ Clean, reusable, and testable.
+
+---
+
+## 🧱 8. Real-World Use Cases
+
+| Scenario                 | Custom Hook Example |
+| ------------------------ | ------------------- |
+| Tracking window size     | `useWindowSize()`   |
+| Handling form inputs     | `useForm()`         |
+| Managing authentication  | `useAuth()`         |
+| API fetching             | `useFetch()`        |
+| Detecting online/offline | `useOnlineStatus()` |
+| Persisting data          | `useLocalStorage()` |
+| Intersection Observer    | `useOnScreen(ref)`  |
+| Timer or countdown       | `useTimer()`        |
+
+---
+
+## ⚠️ 9. Common Pitfalls
+
+| Mistake                 | Description                    | Fix                               |
+| ----------------------- | ------------------------------ | --------------------------------- |
+| ❌ Naming without `use` | React won’t track it as a hook | Always prefix with `use`          |
+| ❌ Conditional calls    | Violates hook rules            | Always call hooks unconditionally |
+| ❌ Complex logic        | Hard to debug                  | Split into smaller hooks          |
+| ❌ Returning too much   | Reduces clarity                | Return minimal necessary data     |
+| ❌ Mutating refs/state  | Causes unpredictable bugs      | Treat state as immutable          |
+
+---
+
+## 🧠 10. Analogy — “Electric Circuits”
+
+Think of your React app as an electronic system.
+Each hook (like `useState`, `useEffect`) is a **component** — you wire them up to build a **device (custom hook)** that performs a specific behavior.
+
+Once you’ve built one (say a voltage regulator), others can **reuse** it without needing to know its internal wiring — just plug and play.
+
+---
+
+## 🧩 11. Testing Custom Hooks
+
+You can test hooks directly using libraries like:
+
+- **React Testing Library**
+- **@testing-library/react-hooks**
+
+Example:
+
+```jsx
+import { renderHook, act } from "@testing-library/react-hooks";
+import useCounter from "./useCounter";
+
+test("should increment counter", () => {
+  const { result } = renderHook(() => useCounter());
+  act(() => result.current.increment());
+  expect(result.current.count).toBe(1);
 });
 ```
 
 ---
 
-## Performance & memoization
+## 🧩 12. Best Practices
 
-- If your hook returns objects or functions, memoize them (useCallback/useMemo) to avoid breaking downstream memoization in consumers.
-
-Example: return stable handlers
-
-```js
-import { useCallback } from "react";
-
-function useCounter(initial = 0) {
-  const [count, setCount] = useState(initial);
-  const inc = useCallback(() => setCount((c) => c + 1), []);
-  const dec = useCallback(() => setCount((c) => c - 1), []);
-  return { count, inc, dec };
-}
-```
+✅ Always start hook names with `use`
+✅ Keep them **pure** — input/output based, avoid side effects unless necessary
+✅ Return consistent data structures
+✅ Separate logic (hooks) from UI (components)
+✅ Combine with Context or Reducer for scalability
+✅ Document their purpose clearly
 
 ---
 
-## API design checklist
+## 🧠 13. Interview Insights
 
-1. Start name with `use`.
-2. Keep return value minimal and stable.
-3. Avoid side-effects during render.
-4. Document lifecycle and expected behavior.
+**Q:** What are custom hooks?
+**A:** Reusable functions that encapsulate stateful logic using other hooks.
 
----
+**Q:** Why use them?
+**A:** To avoid duplication and improve maintainability.
 
-## Exercises
+**Q:** Can custom hooks share state between components?
+**A:** No, each call has its own isolated state — they share **logic**, not **state**.
 
-1. Create `useFetch(url)` hook used by a component to display loading, data, and errors. Handle cancellation with AbortController.
-2. Implement `useUndo(initial)` hook that exposes `{ state, set, undo, redo, canUndo, canRedo }` and use it in a small form.
-3. Write tests for `useDebouncedValue` and `useUndo`.
+**Q:** What’s the naming rule for custom hooks?
+**A:** Must start with `use` — this tells React to validate hook usage.
 
----
-
-## Interview Q&A
-
-Q: How do you make a hook's returned API stable to avoid unnecessary re-renders?
-
-A: Memoize functions/objects with `useCallback`/`useMemo` and avoid returning new object/array literals each render.
-
-Q: Can hooks be conditional?
-
-A: No — hooks must be called unconditionally and in the same order each render. Use early returns inside hooks, not conditional calls to hooks.
+**Q:** Difference between HOC and custom hooks?
+**A:** HOCs wrap components to share logic; custom hooks use functions to share logic — simpler and cleaner.
 
 ---
 
-If you want, I can now:
+## 🔚 14. Summary Table
 
-- Add the `useFetch` and `useUndo` hook files into `vite-starter/src/hooks/` and wire demo components, or
-- Move to `lesson-21-useDebugValue.md` next.
+| Concept         | Description                                         |
+| --------------- | --------------------------------------------------- |
+| Purpose         | Reuse logic between components                      |
+| Syntax          | Function starting with `use`                        |
+| Shares          | Logic, not state                                    |
+| Can use         | Any built-in or custom hooks                        |
+| Common Pairings | `useEffect`, `useState`, `useContext`, `useReducer` |
+| Analogy         | “Recipe” for reusable logic                         |
 
-Which would you like?
-
-```
-
-```
+---
