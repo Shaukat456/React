@@ -8,7 +8,6 @@ Here’s your tutorial:
 
 ---
 
-````{"id":"91524","variant":"standard","title":"React Virtual DOM — In Depth"}
 # 🧠 React Virtual DOM — In Depth Guide
 
 ---
@@ -16,7 +15,7 @@ Here’s your tutorial:
 ## 🧩 1. What is the DOM?
 
 - **DOM (Document Object Model)** is a tree-like representation of your webpage.
-  Every HTML element becomes a *node* (like a branch in a tree).
+  Every HTML element becomes a _node_ (like a branch in a tree).
 
 **Example:**
 
@@ -56,7 +55,7 @@ React follows this **process** whenever your state/props change:
 
 1. React creates a **new Virtual DOM** tree (after state changes).
 2. It **compares** (diffs) it with the **previous Virtual DOM** tree.
-3. It figures out **what changed** (using the *Reconciliation Algorithm*).
+3. It figures out **what changed** (using the _Reconciliation Algorithm_).
 4. It **updates only those parts** of the real DOM that changed.
 
 ---
@@ -70,11 +69,11 @@ When something changes:
 
 React uses a few **heuristics** to optimize:
 
-| Scenario | What React Does |
-|-----------|----------------|
-| Different Element Type | Destroys old node, creates new |
-| Same Type, Different Props | Updates props only |
-| List Items (`key` prop) | Uses `key` to match items efficiently |
+| Scenario                   | What React Does                       |
+| -------------------------- | ------------------------------------- |
+| Different Element Type     | Destroys old node, creates new        |
+| Same Type, Different Props | Updates props only                    |
+| List Items (`key` prop)    | Uses `key` to match items efficiently |
 
 > 🧠 **Key Concept — Reconciliation:**
 > The process of comparing two virtual trees and making minimal changes to the real DOM.
@@ -109,21 +108,23 @@ With Fiber, the chef **prepares one dish, then checks if there’s something mor
 
 React’s work can be divided into **two phases**:
 
-| Phase | What Happens | Thread |
-|--------|---------------|--------|
-| **Render Phase** | React builds the new Virtual DOM and compares it with the old one | Can be paused/interrupted |
-| **Commit Phase** | React updates the real DOM | Synchronous (can’t be interrupted) |
+| Phase            | What Happens                                                      | Thread                             |
+| ---------------- | ----------------------------------------------------------------- | ---------------------------------- |
+| **Render Phase** | React builds the new Virtual DOM and compares it with the old one | Can be paused/interrupted          |
+| **Commit Phase** | React updates the real DOM                                        | Synchronous (can’t be interrupted) |
 
 ---
 
 ## 🧠 7. Why Virtual DOM is Fast (and When It’s Not)
 
 ### 🚀 Why It’s Fast:
+
 - Batch updates
 - Efficient diffing
 - Avoids unnecessary DOM reflows
 
 ### 🐢 When It’s Not:
+
 - Large lists without keys
 - Frequent re-renders due to missing `memo` or `useCallback`
 - Heavy component trees
@@ -132,12 +133,12 @@ React’s work can be divided into **two phases**:
 
 ## ⚠️ 8. Common Pitfalls
 
-| Mistake | Problem | Fix |
-|----------|----------|-----|
+| Mistake                       | Problem                          | Fix                          |
+| ----------------------------- | -------------------------------- | ---------------------------- |
 | Updating state too frequently | Causes extra VDOM recalculations | Debounce or throttle updates |
-| Missing `key` prop in lists | Forces re-render of all items | Always add unique keys |
-| Deep prop drilling | Triggers many updates | Use Context or memoization |
-| Inline functions every render | Causes unnecessary diffing | Use `useCallback` |
+| Missing `key` prop in lists   | Forces re-render of all items    | Always add unique keys       |
+| Deep prop drilling            | Triggers many updates            | Use Context or memoization   |
+| Inline functions every render | Causes unnecessary diffing       | Use `useCallback`            |
 
 ---
 
@@ -192,12 +193,12 @@ Every time you click the button:
 
 ## 🎯 12. Interview Highlights
 
-| Question | Short Answer |
-|-----------|---------------|
-| What is the Virtual DOM? | A lightweight JS representation of the real DOM |
-| Why is it used? | To optimize rendering and updates |
-| What is Reconciliation? | The diffing process between old and new Virtual DOMs |
-| What is Fiber? | React’s concurrent rendering engine introduced in React 16 |
+| Question                           | Short Answer                                                                  |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| What is the Virtual DOM?           | A lightweight JS representation of the real DOM                               |
+| Why is it used?                    | To optimize rendering and updates                                             |
+| What is Reconciliation?            | The diffing process between old and new Virtual DOMs                          |
+| What is Fiber?                     | React’s concurrent rendering engine introduced in React 16                    |
 | Does React always use Virtual DOM? | Yes, but not for all targets (e.g., React Native uses a Virtual Tree concept) |
 
 ---
@@ -221,6 +222,8 @@ Virtual DOM allows **predictable, declarative rendering**.
 ---
 
 > 🧠 “React’s Virtual DOM is not magic — it’s math and management. It minimizes change, maximizes predictability, and gives developers a declarative illusion of simplicity.”
-````
+
+```
 
 ---
+```

@@ -11,15 +11,14 @@
 
 ---
 
-````{"id":"40291","variant":"standard","title":"Advanced React Concepts — In Depth"}
 # ⚛️ Advanced React Concepts — Building Smarter, Scalable, and Performant Apps
 
 ---
 
 ## 🚀 Introduction
 
-Once you’ve learned components, hooks, and routing — you understand *how to build* in React.
-Now, it’s time to understand *how React itself thinks* — and how to use its **advanced features** to make large apps smooth, efficient, and robust.
+Once you’ve learned components, hooks, and routing — you understand _how to build_ in React.
+Now, it’s time to understand _how React itself thinks_ — and how to use its **advanced features** to make large apps smooth, efficient, and robust.
 
 ---
 
@@ -27,7 +26,7 @@ Now, it’s time to understand *how React itself thinks* — and how to use its 
 
 React’s power comes from two principles:
 
-1. **Declarative UI** — You tell React *what* the UI should look like, not *how* to update it.
+1. **Declarative UI** — You tell React _what_ the UI should look like, not _how_ to update it.
 2. **Reactive Updates** — When data (state/props) changes, React automatically re-renders what’s needed.
 
 These two concepts are the foundation for all advanced patterns below.
@@ -37,22 +36,19 @@ These two concepts are the foundation for all advanced patterns below.
 ## 🧩 2. Controlled vs Uncontrolled Components
 
 ### Controlled Components
+
 - Form data is controlled by React state.
 - You always know what’s inside your input fields.
 
 ```jsx
 function Form() {
   const [name, setName] = useState("");
-  return (
-    <input
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-    />
-  );
+  return <input value={name} onChange={(e) => setName(e.target.value)} />;
 }
 ```
 
 ### Uncontrolled Components
+
 - Form data is handled by the DOM itself using refs.
 
 ```jsx
@@ -73,7 +69,7 @@ Uncontrolled = “React lets the browser handle it, and checks later.”
 
 ## 🧩 3. Higher-Order Components (HOCs)
 
-An **HOC** is a function that takes a component and returns a new component — like a *wrapper that injects behavior*.
+An **HOC** is a function that takes a component and returns a new component — like a _wrapper that injects behavior_.
 
 **Example:**
 
@@ -89,11 +85,12 @@ const LoggedButton = withLogger(Button);
 ```
 
 **Use cases:**
+
 - Code reuse
 - Authentication guards
 - Theming / logging / analytics wrappers
 
-⚠️ **Be careful:** HOCs can create *deep nesting* and make debugging harder — prefer hooks when possible.
+⚠️ **Be careful:** HOCs can create _deep nesting_ and make debugging harder — prefer hooks when possible.
 
 ---
 
@@ -105,22 +102,24 @@ Render props allow you to **share logic** between components without HOCs.
 function DataFetcher({ render }) {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch("/api/data").then((r) => r.json()).then(setData);
+    fetch("/api/data")
+      .then((r) => r.json())
+      .then(setData);
   }, []);
   return render(data);
 }
 
 function App() {
   return (
-    <DataFetcher render={(data) => (
-      data ? <div>{data.title}</div> : <p>Loading...</p>
-    )} />
+    <DataFetcher
+      render={(data) => (data ? <div>{data.title}</div> : <p>Loading...</p>)}
+    />
   );
 }
 ```
 
 **Analogy:**
-It’s like passing a **custom camera lens** to a photographer — you decide *how* the data should be “viewed.”
+It’s like passing a **custom camera lens** to a photographer — you decide _how_ the data should be “viewed.”
 
 ---
 
@@ -129,11 +128,13 @@ It’s like passing a **custom camera lens** to a photographer — you decide *h
 Context lets you share state across components **without prop drilling**.
 
 **Best Practices:**
+
 - Keep contexts focused (don’t store the entire app state)
 - Split into smaller contexts for performance
 - Use `useMemo` around context values to prevent unnecessary re-renders
 
 **Example:**
+
 ```jsx
 const ThemeContext = createContext();
 
@@ -154,7 +155,9 @@ function App() {
 ## 🧱 6. React Fragments & Portals
 
 ### Fragments (`<> </>`)
+
 Avoid unnecessary wrapper divs:
+
 ```jsx
 <>
   <Header />
@@ -163,6 +166,7 @@ Avoid unnecessary wrapper divs:
 ```
 
 ### Portals
+
 Render elements **outside the root DOM node** (useful for modals, tooltips, dialogs).
 
 ```jsx
@@ -182,13 +186,19 @@ React components that **catch JavaScript errors** in their children.
 ```jsx
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
-  static getDerivedStateFromError() { return { hasError: true }; }
-  componentDidCatch(error, info) { console.log(error, info); }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
 
   render() {
-    return this.state.hasError
-      ? <h2>Something went wrong</h2>
-      : this.props.children;
+    return this.state.hasError ? (
+      <h2>Something went wrong</h2>
+    ) : (
+      this.props.children
+    );
   }
 }
 ```
@@ -233,6 +243,7 @@ React can now **pause, resume, and prioritize** rendering work — so the UI rem
 **Example:** Typing in a search box won’t freeze the UI even if results are loading in the background.
 
 This is achieved through:
+
 - **Fiber architecture**
 - **Scheduling priority levels**
 - **Interruptible rendering**
@@ -244,13 +255,14 @@ React as a **multitasking chef** 🍳 — it can pause one dish to quickly finis
 
 ## ⚡ 10. Memoization & Performance Patterns
 
-| Tool | Purpose | Example |
-|------|----------|----------|
-| `React.memo()` | Prevent re-render of child if props don’t change | `export default React.memo(Component)` |
-| `useMemo()` | Memoize computed value | `useMemo(() => expensiveCalc(x), [x])` |
-| `useCallback()` | Memoize functions | `useCallback(() => doThing(), [])` |
+| Tool            | Purpose                                          | Example                                |
+| --------------- | ------------------------------------------------ | -------------------------------------- |
+| `React.memo()`  | Prevent re-render of child if props don’t change | `export default React.memo(Component)` |
+| `useMemo()`     | Memoize computed value                           | `useMemo(() => expensiveCalc(x), [x])` |
+| `useCallback()` | Memoize functions                                | `useCallback(() => doThing(), [])`     |
 
 **Rules of Thumb:**
+
 - Don’t overuse memoization — only where performance matters.
 - Use profiling tools (`React Profiler`) to identify slow renders.
 
@@ -259,6 +271,7 @@ React as a **multitasking chef** 🍳 — it can pause one dish to quickly finis
 ## 🧩 11. Controlled Side Effects (useEffect discipline)
 
 When using effects:
+
 - Always clean up (`return () => {...}`)
 - Specify dependencies clearly
 - Use `useLayoutEffect` for DOM measurements
@@ -288,51 +301,51 @@ This is **how libraries like React Three Fiber or Ink** are built.
 
 ## ⚠️ 14. Common Pitfalls in Advanced React
 
-| Pitfall | Explanation | Fix |
-|----------|--------------|-----|
-| Overusing context | Causes re-renders | Split into smaller contexts |
-| Too many effects | Hard to track side-effects | Consolidate related logic |
-| Deep prop drilling | Hard to maintain | Use context or composition |
-| Overmemoization | Increases complexity | Use only when profiling shows benefit |
+| Pitfall            | Explanation                | Fix                                   |
+| ------------------ | -------------------------- | ------------------------------------- |
+| Overusing context  | Causes re-renders          | Split into smaller contexts           |
+| Too many effects   | Hard to track side-effects | Consolidate related logic             |
+| Deep prop drilling | Hard to maintain           | Use context or composition            |
+| Overmemoization    | Increases complexity       | Use only when profiling shows benefit |
 
 ---
 
 ## 🧠 15. Interview-Style Highlights
 
-| Concept | Question | Answer Summary |
-|----------|-----------|----------------|
-| HOC | What is an HOC? | Function that takes a component and returns a new one for code reuse |
-| Render Props | Difference from HOC? | Logic-sharing via render function instead of wrapping |
-| Suspense | Purpose? | Lazy-load components or wait for async data |
-| Error Boundaries | Can they catch hooks errors? | Only class components can be error boundaries currently |
-| Fiber | Why introduced? | To enable concurrency, interruptible rendering |
-| Memoization | When to use? | When expensive computations or re-renders are frequent |
+| Concept          | Question                     | Answer Summary                                                       |
+| ---------------- | ---------------------------- | -------------------------------------------------------------------- |
+| HOC              | What is an HOC?              | Function that takes a component and returns a new one for code reuse |
+| Render Props     | Difference from HOC?         | Logic-sharing via render function instead of wrapping                |
+| Suspense         | Purpose?                     | Lazy-load components or wait for async data                          |
+| Error Boundaries | Can they catch hooks errors? | Only class components can be error boundaries currently              |
+| Fiber            | Why introduced?              | To enable concurrency, interruptible rendering                       |
+| Memoization      | When to use?                 | When expensive computations or re-renders are frequent               |
 
 ---
 
 ## 🧭 16. Big Picture Summary
 
-| Category | Concept | Purpose |
-|-----------|----------|----------|
-| Composition | HOC, Render Props, Compound Components | Reusable logic |
-| Performance | Memoization, useCallback, Suspense | Optimize rendering |
-| Robustness | Error Boundaries, Context | Stability & clean structure |
-| Architecture | Fiber, Virtual DOM | Efficient updates |
-| Experience | Lazy Loading, Concurrent UI | Faster and smoother apps |
+| Category     | Concept                                | Purpose                     |
+| ------------ | -------------------------------------- | --------------------------- |
+| Composition  | HOC, Render Props, Compound Components | Reusable logic              |
+| Performance  | Memoization, useCallback, Suspense     | Optimize rendering          |
+| Robustness   | Error Boundaries, Context              | Stability & clean structure |
+| Architecture | Fiber, Virtual DOM                     | Efficient updates           |
+| Experience   | Lazy Loading, Concurrent UI            | Faster and smoother apps    |
 
 ---
 
 ## 🌍 Analogy Recap
 
-| React Concept | Analogy |
-|----------------|----------|
-| HOC | Clothing tailor adding features to a shirt |
-| Render Props | Camera lens changing how you view data |
-| Suspense | Loading screen waiting for resources |
-| Fiber | Chef multitasking between dishes |
-| Portals | Window to another room (DOM node) |
-| Context | Intercom system sharing info across rooms |
-| Error Boundaries | Safety net catching falling components |
+| React Concept    | Analogy                                    |
+| ---------------- | ------------------------------------------ |
+| HOC              | Clothing tailor adding features to a shirt |
+| Render Props     | Camera lens changing how you view data     |
+| Suspense         | Loading screen waiting for resources       |
+| Fiber            | Chef multitasking between dishes           |
+| Portals          | Window to another room (DOM node)          |
+| Context          | Intercom system sharing info across rooms  |
+| Error Boundaries | Safety net catching falling components     |
 
 ---
 
@@ -348,6 +361,8 @@ This is **how libraries like React Three Fiber or Ink** are built.
 > 💬 **React is like a living organism.**
 > Hooks are its instincts, context is its memory, the virtual DOM is its mind, and fiber is its heartbeat.
 > Understanding these gives you total control over how your app lives, breathes, and reacts.
-````
+
+```
 
 ---
+```

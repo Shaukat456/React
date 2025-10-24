@@ -1,8 +1,8 @@
 ---
 
-## ⚛️ **1. What is React.js?**
+## 1. What is React.js?**
 
-**React.js** (developed by Meta/Facebook) is a **JavaScript library for building user interfaces**, especially **Single Page Applications (SPAs)**.
+**React.js (developed by Meta/Facebook) is a JavaScript library for building user interfaces**, especially **Single Page Applications (SPAs)**.
 
 It focuses only on the **view layer (UI)** — not routing or backend — which makes it lightweight, modular, and highly flexible.
 
