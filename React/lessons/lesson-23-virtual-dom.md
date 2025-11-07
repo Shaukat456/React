@@ -4,8 +4,6 @@
 - Analogies for intuition
 - Pitfalls, optimizations, and real-world implications
 
-Here’s your tutorial:
-
 ---
 
 # 🧠 React Virtual DOM — In Depth Guide
