@@ -1,12 +1,3 @@
-````markdown
-# Prerequisite JavaScript concepts for React
-
-This lesson covers the minimal modern JavaScript knowledge learners should have before diving into React. It's focused, practical, and tied to real React use-cases.
-
-Estimated time: 3–6 hours of hands-on practice (depending on experience)
-
----
-
 ## Goals
 
 - Understand ES6+ syntax used in React code (arrow functions, const/let, destructuring, spread/rest, template strings)
@@ -26,6 +17,7 @@ Estimated time: 3–6 hours of hands-on practice (depending on experience)
 ```js
 const add = (a, b) => a + b;
 ```
+
 ````
 
 - Destructuring — extract properties from objects or arrays:
@@ -172,10 +164,5 @@ Why: Timing matters when coordinating side effects and renders.
 ## When to move on to React
 
 - You’re ready if you can comfortably: read ES6+ syntax, write small modules, fetch data with `async/await`, and use array helpers.
-- If any topic is shaky, spend 1–2 focused days practicing those items — it pays off heavily when learning React.
 
----
-
-```
-
-```
+````
