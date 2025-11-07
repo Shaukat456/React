@@ -18,9 +18,7 @@
 const add = (a, b) => a + b;
 ```
 
-````
-
-- Destructuring — extract properties from objects or arrays:
+### Destructuring — extract properties from objects or arrays:
 
 ```js
 const { name, age } = user;
@@ -171,4 +169,7 @@ Why: Timing matters when coordinating side effects and renders.
 ```
 
 ```
-````
+
+```
+
+```
