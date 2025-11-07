@@ -164,5 +164,11 @@ Why: Timing matters when coordinating side effects and renders.
 ## When to move on to React
 
 - You’re ready if you can comfortably: read ES6+ syntax, write small modules, fetch data with `async/await`, and use array helpers.
+- If any topic is shaky, spend 1–2 focused days practicing those items — it pays off heavily when learning React.
 
+---
+
+```
+
+```
 ````
