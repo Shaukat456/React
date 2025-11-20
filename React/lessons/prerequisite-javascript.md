@@ -9,7 +9,7 @@
 
 ---
 
-## 1) Modern syntax essentials (ES6+)
+## 1 Modern syntax essentials (ES6+)
 
 - `const` / `let` vs `var` — prefer `const` for values that don't change and `let` for reassignable variables; avoid `var`.
 - Arrow functions — concise syntax and lexical `this` (important when writing handlers):

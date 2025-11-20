@@ -1,10 +1,3 @@
----
-title: "Reflow and Repaint — Detailed"
-description: "MDX note: what reflow and repaint are, what triggers them, how to measure and how to minimize their cost."
----
-
-import { Meta } from 'some-ui' // optional example import; remove if unused
-
 # Reflow and Repaint — Detailed
 
 This document explains the difference between reflow (layout) and repaint (paint), what causes them, how to measure them, and practical strategies to reduce their performance cost in web apps.
