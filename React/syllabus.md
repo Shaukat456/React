@@ -38,3 +38,9 @@ Course sequence and outcomes
 Next steps
 
 If you'd like, I will expand Lessons 05–10 in the same detailed style (theory + runnable examples + interview Q&A). For now I will expand Lessons 01–04 with detailed content, scenarios, best/worst practices, and interview questions.
+
+todo :
+dynamics keys,
+use state in detail,
+use effect
+conditional rendering
