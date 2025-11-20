@@ -327,5 +327,4 @@ If addresses keep changing, your mail (updates) ends up in the wrong place!
 
 ```
 
-Would you like me to continue next with **Conditional Rendering (if / ternary / short-circuit / dynamic components)** — including advanced patterns and performance tricks?
 ```
