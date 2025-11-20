@@ -1,6 +1,4 @@
----
-
-## ⚛️ **1. What is Rendering in React?**
+⚛️ **1. What is Rendering in React?**
 
 **Rendering** means:
 
