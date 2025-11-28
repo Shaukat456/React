@@ -1,6 +1,3 @@
-Excellent — you’re now at one of React’s most **deceptively simple but deeply powerful** hooks:
-👉 `useRef()`
-
 It seems tiny at first, but it quietly powers **DOM manipulation**, **state persistence**, **performance tuning**, and even **lifecycle coordination**.
 
 Let’s explore it **in depth** — from theory → to real-world use cases → to analogies → to common mistakes 👇

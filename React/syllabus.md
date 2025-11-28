@@ -35,9 +35,6 @@ Course sequence and outcomes
 9. Lesson 09 — State management strategies and testing fundamentals
 10. Lesson 10 — Build, deploy and next steps (Vite, deployment options)
 
-Next steps
-
-If you'd like, I will expand Lessons 05–10 in the same detailed style (theory + runnable examples + interview Q&A). For now I will expand Lessons 01–04 with detailed content, scenarios, best/worst practices, and interview questions.
 
 todo :
 dynamics keys,
