@@ -1,0 +1,1881 @@
+# Software Requirement Engineering Mastery
+
+### From Scratch to Advanced — A Complete Lesson-by-Lesson Course
+
+> **Who this course is for:** Complete beginners who want to understand Software Requirement Engineering (SRE) from the ground up, as well as intermediate practitioners looking to sharpen their skills with industry-standard practices.
+
+---
+
+## 📚 Course Overview
+
+| Module    | Title                                            | Level                 |
+| --------- | ------------------------------------------------ | --------------------- |
+| Module 1  | Introduction to Software Requirement Engineering | Beginner              |
+| Module 2  | Types of Requirements                            | Beginner              |
+| Module 3  | Stakeholder Analysis & Management                | Beginner–Intermediate |
+| Module 4  | Requirements Elicitation Techniques              | Intermediate          |
+| Module 5  | Requirements Documentation                       | Intermediate          |
+| Module 6  | Use Cases & User Stories                         | Intermediate          |
+| Module 7  | Requirements Analysis & Modelling                | Intermediate          |
+| Module 8  | Requirements Validation & Verification           | Intermediate–Advanced |
+| Module 9  | Requirements Management & Traceability           | Advanced              |
+| Module 10 | Agile Requirements Engineering                   | Advanced              |
+| Module 11 | Requirements in Large-Scale & Complex Systems    | Advanced              |
+| Module 12 | Tools, Standards & Career Path                   | Advanced              |
+
+---
+
+# MODULE 1 — Introduction to Software Requirement Engineering
+
+---
+
+## Lesson 1.1 — What is Software Engineering?
+
+### Overview
+
+Before diving into _requirement engineering_, you need to understand the broader discipline it belongs to: **Software Engineering**.
+
+Software Engineering is the systematic application of engineering principles to the design, development, testing, deployment, and maintenance of software. It is not just about writing code — it is about building the _right_ software in a _disciplined_, _repeatable_, and _measurable_ way.
+
+### Why Software Projects Fail
+
+Studies and industry reports (notably the Standish Group's **CHAOS Report**) consistently show that a large percentage of software projects are either cancelled, delivered late, over budget, or fail to satisfy users. The top reasons include:
+
+- Incomplete or unclear requirements
+- Lack of user involvement
+- Unrealistic expectations
+- Scope creep (uncontrolled changes in project scope)
+- Poor communication between stakeholders and developers
+
+> **Key Insight:** Most software failures trace back to requirement problems — not coding errors.
+
+### 🗝️ Industry Terms
+
+| Term                                       | Definition                                                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------ |
+| **Software Engineering**                   | Disciplined application of engineering principles to software development      |
+| **SDLC (Software Development Life Cycle)** | The structured process for planning, creating, testing, and deploying software |
+| **Stakeholder**                            | Any person or group with an interest in the software system                    |
+| **Scope Creep**                            | Uncontrolled expansion of a project's requirements without proper evaluation   |
+| **CHAOS Report**                           | An annual study by the Standish Group measuring software project success rates |
+| **Deliverable**                            | A tangible output produced during a project phase                              |
+
+---
+
+## Lesson 1.2 — What is Requirement Engineering?
+
+### Definition
+
+**Requirement Engineering (RE)** is the process of defining, documenting, and maintaining the requirements of a software system. It is the _first and most critical phase_ of the Software Development Life Cycle (SDLC).
+
+It answers three fundamental questions:
+
+1. **What** does the system need to do?
+2. **For whom** is it being built?
+3. **Under what constraints** must it operate?
+
+### The RE Process at a Glance
+
+```
+Elicitation → Analysis → Specification → Validation → Management
+```
+
+Each of these steps will be covered in detail in later modules. For now, understand this as the high-level flow from discovering requirements to managing them throughout the project.
+
+### Why Requirement Engineering Matters
+
+The **cost of fixing a defect** increases dramatically the later it is found in the SDLC:
+
+- Fixing a requirement error during the **Requirements phase**: $1 (relative cost)
+- Fixing it during **Design**: ~$5
+- Fixing it during **Coding**: ~$10
+- Fixing it during **Testing**: ~$20
+- Fixing it after **Deployment**: ~$200 or more
+
+> This is known as the **"Rule of 10"** or the **Boehm Cost Escalation Curve**.
+
+### 🗝️ Industry Terms
+
+| Term                             | Definition                                                                            |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| **Requirement Engineering (RE)** | The discipline of discovering, documenting, analyzing, and managing requirements      |
+| **Elicitation**                  | The process of gathering requirements from stakeholders                               |
+| **Specification**                | A precise, documented description of requirements                                     |
+| **Validation**                   | Confirming that requirements reflect the true needs of stakeholders                   |
+| **Verification**                 | Confirming that the built system matches the specifications                           |
+| **Boehm's Cost Escalation**      | The principle that defect fix cost increases exponentially the later it is discovered |
+| **Requirements Baseline**        | A formally approved, stable version of requirements used as a reference               |
+
+---
+
+## Lesson 1.3 — The Role of a Requirements Engineer
+
+### Who Does This Work?
+
+In industry, requirement engineering is performed by:
+
+- **Business Analyst (BA)** — The most common title; bridges the gap between business needs and technical solutions
+- **Requirements Engineer** — A more technical-focused role in systems engineering
+- **Product Owner (PO)** — In Agile teams, responsible for defining and prioritizing the product backlog
+- **Systems Analyst** — Analyzes existing systems and defines requirements for new ones
+- **Functional Consultant** — Common in ERP/SAP projects
+
+### Core Responsibilities
+
+1. **Eliciting** requirements through interviews, workshops, observations
+2. **Analyzing** requirements for completeness, consistency, and feasibility
+3. **Documenting** requirements in formal documents or user stories
+4. **Managing** changes to requirements throughout the project
+5. **Communicating** between business stakeholders and development teams
+6. **Validating** that what is built matches what was asked for
+
+### Key Soft Skills
+
+- Active listening
+- Facilitation
+- Conflict resolution
+- Written and verbal communication
+- Critical thinking
+
+### 🗝️ Industry Terms
+
+| Term                            | Definition                                                                         |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| **Business Analyst (BA)**       | Professional who analyzes business needs and translates them into requirements     |
+| **Product Owner (PO)**          | Agile role responsible for defining and prioritizing the product backlog           |
+| **Backlog**                     | A prioritized list of features, requirements, or tasks to be completed             |
+| **SME (Subject Matter Expert)** | A person with deep expertise in a specific domain                                  |
+| **RACI Matrix**                 | Responsible, Accountable, Consulted, Informed — a stakeholder responsibility model |
+
+---
+
+# MODULE 2 — Types of Requirements
+
+---
+
+## Lesson 2.1 — Functional Requirements
+
+### Definition
+
+**Functional Requirements (FRs)** describe _what_ the system must do — the specific behaviors, functions, and capabilities the system must provide.
+
+They define:
+
+- System features and functions
+- Inputs and outputs
+- Business rules and logic
+- User interactions
+
+### Examples
+
+| System          | Functional Requirement                                              |
+| --------------- | ------------------------------------------------------------------- |
+| E-Commerce      | "The system shall allow users to add products to a shopping cart"   |
+| Banking App     | "The system shall send an SMS OTP for every login attempt"          |
+| HR System       | "The system shall generate monthly payslips in PDF format"          |
+| Hospital System | "The system shall maintain a patient's medical history for 7 years" |
+
+### Characteristics of Good Functional Requirements
+
+- **Clear** — unambiguous language
+- **Complete** — covers all scenarios including edge cases
+- **Consistent** — does not contradict other requirements
+- **Testable** — can be verified through testing
+- **Traceable** — linked back to a business need
+
+### 🗝️ Industry Terms
+
+| Term                            | Definition                                                                                          |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Functional Requirement (FR)** | A requirement that specifies what a system should do                                                |
+| **Business Rule**               | A policy or rule that governs business behavior (e.g., "Discounts apply only to orders above $100") |
+| **Acceptance Criterion**        | A condition that must be met for a requirement to be considered complete                            |
+| **Edge Case**                   | An unusual or extreme input scenario that must also be handled                                      |
+| **CRUD**                        | Create, Read, Update, Delete — fundamental data operations in most systems                          |
+
+---
+
+## Lesson 2.2 — Non-Functional Requirements (NFRs)
+
+### Definition
+
+**Non-Functional Requirements (NFRs)** describe _how_ the system should perform — the quality attributes and constraints that apply to the system as a whole, not to specific behaviors.
+
+They are sometimes called **Quality Attributes** or **System Properties**.
+
+### The FURPS+ Model
+
+A widely used classification model for NFRs:
+
+| Category           | Description                     | Example                                                     |
+| ------------------ | ------------------------------- | ----------------------------------------------------------- |
+| **Functionality**  | Features and security           | "Only admins can delete records"                            |
+| **Usability**      | User interface and UX           | "95% of users shall complete onboarding in under 5 minutes" |
+| **Reliability**    | Availability and failure rate   | "System uptime shall be 99.9%"                              |
+| **Performance**    | Speed and capacity              | "Search results shall appear within 2 seconds"              |
+| **Supportability** | Maintainability and scalability | "System shall support horizontal scaling"                   |
+| **+ Constraints**  | Design, implementation, legal   | "Must comply with GDPR"                                     |
+
+### Common NFR Categories
+
+**Performance Requirements:**
+
+- Response time (e.g., "API response < 500ms")
+- Throughput (e.g., "System must handle 10,000 concurrent users")
+- Resource utilization (CPU, memory)
+
+**Security Requirements:**
+
+- Authentication and authorization
+- Data encryption (e.g., "All passwords shall be stored using bcrypt")
+- Compliance (GDPR, HIPAA, PCI-DSS)
+
+**Usability Requirements:**
+
+- Accessibility (WCAG 2.1 AA compliance)
+- Localization and internationalization (L10n / I18n)
+
+**Reliability & Availability:**
+
+- RTO (Recovery Time Objective)
+- RPO (Recovery Point Objective)
+- Mean Time Between Failures (MTBF)
+
+### ⚠️ Common Mistake
+
+Many beginners ignore NFRs or treat them as secondary. In practice, failing NFRs is one of the most common causes of production failures. A system that _works_ but is _too slow_ or _not secure_ is still a failed system.
+
+### 🗝️ Industry Terms
+
+| Term                                 | Definition                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------- |
+| **Non-Functional Requirement (NFR)** | A requirement specifying how well a system performs its functions               |
+| **Quality Attribute**                | A measurable property of a system (performance, security, usability, etc.)      |
+| **SLA (Service Level Agreement)**    | A contract defining performance standards between provider and client           |
+| **Uptime / Availability**            | The percentage of time a system is operational (e.g., "99.9% uptime")           |
+| **GDPR**                             | General Data Protection Regulation — EU data privacy law                        |
+| **HIPAA**                            | Health Insurance Portability and Accountability Act — US healthcare data law    |
+| **RTO**                              | Recovery Time Objective — max acceptable time to restore a system after failure |
+| **RPO**                              | Recovery Point Objective — max acceptable data loss in case of failure          |
+| **Scalability**                      | The ability of a system to handle growing amounts of work                       |
+| **WCAG**                             | Web Content Accessibility Guidelines                                            |
+
+---
+
+## Lesson 2.3 — Business Requirements, System Requirements & User Requirements
+
+### The Requirements Hierarchy
+
+Requirements exist at different levels of abstraction. Understanding this hierarchy prevents confusion in documentation.
+
+```
+Business Requirements (WHY)
+        ↓
+User Requirements (WHAT users need)
+        ↓
+System Requirements (HOW the system will meet user needs)
+        ↓
+Technical / Implementation Requirements (HOW the system will be built)
+```
+
+### Business Requirements
+
+- Defined by **executive sponsors**, **clients**, or **business owners**
+- Express _why_ the project exists (business goals and objectives)
+- Example: _"Increase online sales by 30% in the next fiscal year"_
+
+### User Requirements
+
+- Defined by **end users** or their representatives
+- Describe what users need to accomplish their goals
+- Often written as **Use Cases** or **User Stories**
+- Example: _"As a customer, I want to track my order in real-time so that I know when it will arrive"_
+
+### System Requirements
+
+- Defined by **analysts** and **architects**
+- Specify what the system must do to meet user requirements
+- More technical and detailed than user requirements
+- Example: _"The system shall expose a RESTful API endpoint `/orders/{id}/track` returning order location data"_
+
+### 🗝️ Industry Terms
+
+| Term                     | Definition                                                                        |
+| ------------------------ | --------------------------------------------------------------------------------- |
+| **Business Requirement** | A high-level statement of the business objective the project must achieve         |
+| **User Requirement**     | What an end user needs the system to do                                           |
+| **System Requirement**   | A precise statement of what the system itself must do or how it must behave       |
+| **Constraint**           | A restriction or limitation imposed on the system (technology, budget, time, law) |
+| **Assumption**           | A condition believed to be true without verification                              |
+| **Dependency**           | A relationship where one requirement relies on another being fulfilled            |
+
+---
+
+## Lesson 2.4 — Other Requirement Categories
+
+### Domain Requirements
+
+Requirements derived from the **application domain** — the industry-specific rules and knowledge that the system must encode.
+
+Examples:
+
+- Banking: "Transactions must be ACID-compliant"
+- Healthcare: "System must support ICD-10 medical coding standards"
+- Insurance: "Premium calculations must follow IRDA guidelines"
+
+### Interface Requirements
+
+Define how the system interacts with other systems, hardware, or users:
+
+- **UI Requirements** — How the interface looks and behaves
+- **API Requirements** — How systems communicate
+- **Hardware Interface Requirements** — Printers, sensors, biometric devices
+- **Communication Interface Requirements** — Protocols (REST, SOAP, MQTT)
+
+### Transition Requirements
+
+Requirements needed to transition from the **current state** to the **future state**:
+
+- Data migration rules
+- Training requirements
+- Legacy system decommissioning
+
+### 🗝️ Industry Terms
+
+| Term                                        | Definition                                                                                   |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Domain Requirement**                      | A requirement derived from the specific industry or application domain                       |
+| **Interface Requirement**                   | Defines how the system interacts with external systems, users, or hardware                   |
+| **Transition Requirement**                  | Describes what is needed to move from the current to the future state                        |
+| **Data Migration**                          | The process of moving data from one system or format to another                              |
+| **Legacy System**                           | An old system still in use, often difficult to integrate with modern technology              |
+| **API (Application Programming Interface)** | A contract defining how software components communicate                                      |
+| **ACID**                                    | Atomicity, Consistency, Isolation, Durability — properties of reliable database transactions |
+
+---
+
+# MODULE 3 — Stakeholder Analysis & Management
+
+---
+
+## Lesson 3.1 — Who Are Stakeholders?
+
+### Definition
+
+A **stakeholder** is any individual, group, or organization that has an interest in — or is affected by — the software system being built.
+
+> **Rule of Thumb:** If the system impacts someone's work, data, money, or processes — they are a stakeholder.
+
+### Categories of Stakeholders
+
+**Internal Stakeholders:**
+
+- Executive sponsors / senior management
+- Product managers
+- Development team (developers, architects, testers)
+- Operations / IT support team
+
+**External Stakeholders:**
+
+- Customers / end users
+- Clients / paying organizations
+- Regulatory bodies (government agencies)
+- Third-party vendors and partners
+
+**Direct vs. Indirect:**
+
+- **Direct**: People who use the system daily (end users, administrators)
+- **Indirect**: People affected by outputs (managers reading reports, auditors)
+
+### 🗝️ Industry Terms
+
+| Term            | Definition                                                    |
+| --------------- | ------------------------------------------------------------- |
+| **Stakeholder** | Any party with an interest in or affected by the project      |
+| **Sponsor**     | The individual or organization funding the project            |
+| **End User**    | The person who will directly use the finished system          |
+| **Champion**    | A stakeholder who actively supports and promotes the project  |
+| **Blocker**     | A stakeholder who actively resists the project                |
+| **Proxy User**  | A person representing end users when direct access is limited |
+
+---
+
+## Lesson 3.2 — Stakeholder Analysis Techniques
+
+### Power/Interest Grid (Mendelow's Matrix)
+
+One of the most widely used tools for stakeholder prioritization.
+
+```
+         HIGH POWER
+              |
+  Keep        |    Manage
+ Satisfied    |    Closely
+              |
+--------------+--------------  INTEREST →
+              |
+   Monitor    |    Keep
+ (Minimum     |   Informed
+  Effort)     |
+              |
+         LOW POWER
+```
+
+| Quadrant                  | Strategy                    |
+| ------------------------- | --------------------------- |
+| High Power, Low Interest  | Keep Satisfied              |
+| High Power, High Interest | Manage Closely              |
+| Low Power, Low Interest   | Monitor with Minimum Effort |
+| Low Power, High Interest  | Keep Informed               |
+
+### Stakeholder Register
+
+A document that records all identified stakeholders along with:
+
+- Name and role
+- Organization
+- Contact information
+- Level of influence and interest
+- Communication preferences
+- Key concerns and expectations
+
+### Onion Diagram
+
+A layered visualization showing stakeholders by proximity to the system:
+
+- **Core** — Direct users who interact with the system daily
+- **Middle ring** — Managers and indirect users
+- **Outer ring** — Society, regulators, market forces
+
+### 🗝️ Industry Terms
+
+| Term                     | Definition                                                                |
+| ------------------------ | ------------------------------------------------------------------------- |
+| **Stakeholder Register** | A document listing all stakeholders, their roles, and engagement details  |
+| **Power/Interest Grid**  | A 2×2 matrix for categorizing and prioritizing stakeholders               |
+| **Onion Diagram**        | A layered model showing stakeholder proximity to the system               |
+| **Influence**            | A stakeholder's ability to affect decisions or outcomes                   |
+| **Engagement**           | Active involvement of stakeholders in the project                         |
+| **Sign-off**             | Formal approval of a document or deliverable by an authorized stakeholder |
+
+---
+
+## Lesson 3.3 — Managing Conflicting Requirements
+
+### Why Conflicts Happen
+
+Different stakeholders have different — sometimes opposing — needs:
+
+- Sales wants fast features; Security wants thorough validation
+- Users want simplicity; Compliance demands detailed audit logs
+- Management wants low cost; IT wants scalable infrastructure
+
+### Resolution Strategies
+
+1. **Negotiation** — Facilitate a discussion and find a mutually acceptable solution
+2. **Prioritization** — Use frameworks like MoSCoW to rank conflicting requirements
+3. **Escalation** — Bring unresolvable conflicts to the project sponsor or steering committee
+4. **Deferral** — Agree to address lower-priority conflicting requirements in a future release
+5. **Decomposition** — Break a large requirement into smaller parts to resolve partial conflicts
+
+### MoSCoW Prioritization
+
+| Priority | Meaning     | Description                                 |
+| -------- | ----------- | ------------------------------------------- |
+| **M**    | Must Have   | Non-negotiable; project fails without it    |
+| **S**    | Should Have | Important but not critical to launch        |
+| **C**    | Could Have  | Nice to have; include if time/budget allows |
+| **W**    | Won't Have  | Explicitly excluded from this release       |
+
+### 🗝️ Industry Terms
+
+| Term                      | Definition                                                       |
+| ------------------------- | ---------------------------------------------------------------- |
+| **MoSCoW**                | A prioritization technique: Must, Should, Could, Won't           |
+| **Trade-off**             | Accepting a loss in one area to gain in another                  |
+| **Escalation**            | Referring a decision to a higher authority                       |
+| **Steering Committee**    | A group of senior stakeholders who oversee project direction     |
+| **Requirements Conflict** | Two or more requirements that cannot be simultaneously satisfied |
+| **Prioritization**        | Ranking requirements by importance and urgency                   |
+
+---
+
+# MODULE 4 — Requirements Elicitation Techniques
+
+---
+
+## Lesson 4.1 — What is Elicitation?
+
+**Requirements Elicitation** is the practice of discovering, collecting, and gathering requirements from stakeholders and other sources. It is sometimes called **requirements discovery** or **requirements gathering** (though "gathering" implies requirements are passively waiting to be collected — elicitation is an _active_ process).
+
+### Sources of Requirements
+
+- **Stakeholders** — interviews, workshops, surveys
+- **Existing documentation** — legacy specs, user manuals, contracts
+- **Existing systems** — observation, system analysis
+- **Domain knowledge** — industry standards, regulations
+- **Competitors** — benchmarking, feature comparison
+
+### Challenges in Elicitation
+
+- Stakeholders do not know what they want
+- Stakeholders know what they want but cannot articulate it
+- Different stakeholders want contradictory things
+- Tacit knowledge (knowledge that is hard to express verbally)
+- Politics and organizational resistance
+
+---
+
+## Lesson 4.2 — Interviews
+
+### Overview
+
+The **interview** is the most fundamental and widely used elicitation technique. A requirements engineer conducts a structured conversation with stakeholders to understand their needs, problems, and expectations.
+
+### Types of Interviews
+
+| Type                | Description                                   | Best For                                                |
+| ------------------- | --------------------------------------------- | ------------------------------------------------------- |
+| **Structured**      | Fixed set of predetermined questions          | Consistent data collection across multiple stakeholders |
+| **Unstructured**    | Open conversation, no fixed agenda            | Exploratory discovery in early stages                   |
+| **Semi-structured** | Prepared questions but allows free discussion | Most common in practice                                 |
+
+### Interview Best Practices
+
+- Prepare questions in advance
+- Start with open-ended questions ("Tell me about your current process")
+- Follow up with closed questions to clarify ("So this happens every Monday?")
+- Record (with permission) or take detailed notes
+- Send a summary to the interviewee for validation after the meeting
+
+### Types of Questions
+
+**Open-ended:** "How do you currently handle invoice approvals?"
+**Closed-ended:** "Does this happen more than once per week?"
+**Probing:** "You mentioned delays — can you describe a specific example?"
+**Hypothetical:** "If the current limitation were removed, what would you do differently?"
+
+### 🗝️ Industry Terms
+
+| Term                      | Definition                                                             |
+| ------------------------- | ---------------------------------------------------------------------- |
+| **Elicitation**           | Active discovery and collection of requirements                        |
+| **Open-ended Question**   | A question that cannot be answered with yes/no; encourages elaboration |
+| **Closed-ended Question** | A question with a specific short answer (yes/no, date, number)         |
+| **Probing Question**      | A follow-up question that digs deeper into an answer                   |
+| **Tacit Knowledge**       | Knowledge that is known but difficult to express or articulate         |
+| **Interview Minutes**     | Written record/summary of an interview                                 |
+
+---
+
+## Lesson 4.3 — Workshops & Focus Groups
+
+### Joint Application Development (JAD)
+
+**JAD** is a structured, facilitated workshop where stakeholders and developers collaborate to define requirements together in a single session. It was developed by IBM and is widely used in enterprise projects.
+
+**Key roles in a JAD session:**
+
+- **Facilitator** — Guides the session, manages discussion
+- **Scribe** — Documents everything discussed
+- **Participants** — Stakeholders and subject matter experts
+- **Observer** — Silently observes (optional)
+
+**Benefits:**
+
+- Faster than conducting multiple individual interviews
+- Reduces communication gaps
+- Builds consensus among stakeholders
+
+### Focus Groups
+
+A moderated discussion with a representative group of end users to gather opinions and preferences. Common in consumer software and UX research.
+
+### Brainstorming
+
+An unstructured group technique to generate as many ideas as possible without criticism. Used to discover features, risks, or constraints that were not initially considered.
+
+### 🗝️ Industry Terms
+
+| Term                                    | Definition                                                                |
+| --------------------------------------- | ------------------------------------------------------------------------- |
+| **JAD (Joint Application Development)** | A facilitated workshop technique for collaborative requirements gathering |
+| **Facilitator**                         | A neutral person who guides a discussion or workshop                      |
+| **Scribe**                              | A person responsible for recording meeting notes or session outcomes      |
+| **Consensus**                           | General agreement among all participants                                  |
+| **Focus Group**                         | A moderated discussion with selected users to gather qualitative feedback |
+| **Brainstorming**                       | A group creativity technique to generate many ideas quickly               |
+
+---
+
+## Lesson 4.4 — Observation & Ethnography
+
+### Overview
+
+**Observation** (also called **Ethnographic Study** or **Job Shadowing**) involves watching how users actually perform their work — rather than asking them to describe it. This is powerful because users often do things differently than they describe.
+
+### Types of Observation
+
+| Type                        | Description                                                        |
+| --------------------------- | ------------------------------------------------------------------ |
+| **Passive Observation**     | Observe without interacting; user behaves naturally                |
+| **Active Observation**      | Observer asks questions while watching ("Why did you click that?") |
+| **Participant Observation** | Observer temporarily joins the user's work                         |
+
+### When to Use
+
+- Understanding complex or poorly documented workflows
+- Discovering "hidden" processes users don't mention in interviews
+- Validating that your understanding of a process is accurate
+- Identifying pain points in existing systems
+
+### 🗝️ Industry Terms
+
+| Term              | Definition                                                                |
+| ----------------- | ------------------------------------------------------------------------- |
+| **Ethnography**   | A qualitative research method involving immersive, in-context observation |
+| **Job Shadowing** | Observing a user during their normal work activities                      |
+| **Workflow**      | A sequence of steps or tasks performed to complete a business process     |
+| **Pain Point**    | A frustration or inefficiency in a user's current process                 |
+| **As-Is Process** | The current state of a business process before the new system             |
+| **To-Be Process** | The desired future state of a business process after the new system       |
+
+---
+
+## Lesson 4.5 — Surveys, Questionnaires & Document Analysis
+
+### Surveys & Questionnaires
+
+Used when stakeholders are large in number, geographically distributed, or when quantitative data is needed.
+
+**Design Tips:**
+
+- Keep surveys short (under 15 minutes to complete)
+- Use Likert scales for opinion questions (1–5 or 1–7)
+- Test the survey with a small group before wide distribution
+- Avoid leading questions
+
+### Document Analysis
+
+Reviewing existing documents to extract requirements:
+
+- Business process documents
+- Legacy system documentation
+- Legal and regulatory requirements
+- Contracts and SLAs
+- User manuals and help guides
+- Audit reports
+
+### Prototyping as Elicitation
+
+Creating a **mock-up or prototype** and showing it to stakeholders is highly effective because:
+
+- Stakeholders respond better to _seeing_ than _reading_
+- It makes abstract requirements concrete
+- It helps discover requirements that were not initially expressed
+
+Types:
+
+- **Paper prototype** — Hand-drawn screens
+- **Low-fidelity prototype** — Simple wireframes (Balsamiq, Figma low-fi)
+- **High-fidelity prototype** — Interactive, near-realistic mockups
+
+### 🗝️ Industry Terms
+
+| Term                  | Definition                                                            |
+| --------------------- | --------------------------------------------------------------------- |
+| **Survey**            | A structured set of questions sent to many respondents to gather data |
+| **Likert Scale**      | A rating scale (e.g., 1 = Strongly Disagree, 5 = Strongly Agree)      |
+| **Document Analysis** | Reviewing existing materials to extract requirements                  |
+| **Prototype**         | An early model of a system used to explore or validate requirements   |
+| **Wireframe**         | A low-fidelity visual representation of a user interface              |
+| **Mock-up**           | A higher-fidelity static visual of a UI design                        |
+| **Storyboard**        | A sequence of visual frames describing a user's interaction flow      |
+
+---
+
+# MODULE 5 — Requirements Documentation
+
+---
+
+## Lesson 5.1 — Software Requirements Specification (SRS)
+
+### What is an SRS?
+
+The **Software Requirements Specification (SRS)** is the primary formal document that describes the complete requirements of a software system. It serves as a contract between the client and the development team.
+
+> **Standard Reference:** IEEE 830 (now superseded by ISO/IEC/IEEE 29148) defines the structure and content of an SRS.
+
+### Structure of an SRS (IEEE 830 Template)
+
+```
+1. Introduction
+   1.1 Purpose
+   1.2 Scope
+   1.3 Definitions, Acronyms, Abbreviations
+   1.4 References
+   1.5 Overview
+
+2. Overall Description
+   2.1 Product Perspective
+   2.2 Product Functions
+   2.3 User Characteristics
+   2.4 Constraints
+   2.5 Assumptions and Dependencies
+
+3. Specific Requirements
+   3.1 External Interface Requirements
+   3.2 Functional Requirements
+   3.3 Non-Functional Requirements
+   3.4 Other Requirements
+
+4. Appendices
+```
+
+### Qualities of a Good SRS
+
+| Quality         | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| **Correct**     | Every stated requirement is something the system must satisfy   |
+| **Unambiguous** | Each requirement has one and only one interpretation            |
+| **Complete**    | All significant requirements are included                       |
+| **Consistent**  | No conflicting requirements                                     |
+| **Ranked**      | Requirements are prioritized                                    |
+| **Verifiable**  | Each requirement can be tested                                  |
+| **Modifiable**  | Structure allows easy updates                                   |
+| **Traceable**   | Each requirement can be traced to its origin and to design/test |
+
+### 🗝️ Industry Terms
+
+| Term                                          | Definition                                                                  |
+| --------------------------------------------- | --------------------------------------------------------------------------- |
+| **SRS (Software Requirements Specification)** | The formal document describing all requirements of a system                 |
+| **IEEE 830**                                  | An IEEE standard for SRS structure (largely replaced by ISO/IEC/IEEE 29148) |
+| **ISO/IEC/IEEE 29148**                        | The current international standard for requirements engineering             |
+| **Ambiguity**                                 | Language that can be interpreted in more than one way                       |
+| **Completeness**                              | All necessary requirements are included, with no gaps                       |
+| **Traceability**                              | The ability to link a requirement to its origin and to resulting artifacts  |
+
+---
+
+## Lesson 5.2 — Business Requirements Document (BRD)
+
+### What is a BRD?
+
+The **Business Requirements Document (BRD)** is a formal document that captures the business objectives, scope, and high-level requirements of a project. It is written for business audiences and focuses on _what_ is needed, not _how_ it will be achieved.
+
+### BRD vs. SRS
+
+| Aspect              | BRD                   | SRS                                |
+| ------------------- | --------------------- | ---------------------------------- |
+| **Audience**        | Business stakeholders | Development team                   |
+| **Level of Detail** | High-level            | Detailed                           |
+| **Language**        | Business language     | Technical language                 |
+| **Focus**           | Business goals        | System behavior                    |
+| **Written By**      | Business Analyst      | Business Analyst / Systems Analyst |
+
+### Typical BRD Sections
+
+1. Executive Summary
+2. Business Objectives
+3. Project Scope
+4. Stakeholder Analysis
+5. Current State (As-Is)
+6. Future State (To-Be)
+7. High-Level Requirements
+8. Assumptions and Constraints
+9. Success Criteria / KPIs
+
+### 🗝️ Industry Terms
+
+| Term                                       | Definition                                                                   |
+| ------------------------------------------ | ---------------------------------------------------------------------------- |
+| **BRD (Business Requirements Document)**   | A document capturing business goals and high-level requirements              |
+| **FRD (Functional Requirements Document)** | A detailed document focusing on functional requirements                      |
+| **Scope Statement**                        | A clear description of what is included and excluded from the project        |
+| **In Scope**                               | Work that is included in the project                                         |
+| **Out of Scope**                           | Work explicitly excluded from the project                                    |
+| **KPI (Key Performance Indicator)**        | A measurable value that indicates how well a business objective is being met |
+| **As-Is**                                  | The current state of a process or system                                     |
+| **To-Be**                                  | The desired future state after the system is implemented                     |
+
+---
+
+## Lesson 5.3 — Writing Good Requirements
+
+### The SMART Criteria for Requirements
+
+Good requirements should be:
+
+- **S**pecific — Clearly defined, not vague
+- **M**easurable — Can be tested or quantified
+- **A**chievable — Technically and practically feasible
+- **R**elevant — Aligned with business objectives
+- **T**ime-bound — Delivered within a defined timeline
+
+### Common Requirement Writing Mistakes
+
+| Mistake                          | Bad Example                                                        | Good Example                                                                   |
+| -------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| **Vague language**               | "The system should be fast"                                        | "The system shall return search results in under 2 seconds for 95% of queries" |
+| **Multiple requirements in one** | "The system shall allow login and registration and password reset" | Split into three separate requirements                                         |
+| **Untestable**                   | "The UI should be user-friendly"                                   | "85% of new users shall complete onboarding without help desk assistance"      |
+| **Implementation detail**        | "The system shall use React.js for the UI"                         | Leave implementation choice to the development team                            |
+| **Passive voice**                | "Payments should be processed"                                     | "The system shall process payments within 3 seconds"                           |
+| **Escape clauses**               | "The system should try to..."                                      | "The system shall..."                                                          |
+
+### Requirement Statement Template
+
+Use **SHALL** for mandatory requirements and **SHOULD** for recommendations:
+
+```
+[Subject] SHALL/SHOULD [Action] [Object] [Condition/Constraint]
+
+Example:
+"The system SHALL display an error message when a user enters
+ an invalid email format in the registration form."
+```
+
+### 🗝️ Industry Terms
+
+| Term                       | Definition                                                                 |
+| -------------------------- | -------------------------------------------------------------------------- |
+| **SMART**                  | Specific, Measurable, Achievable, Relevant, Time-bound                     |
+| **Atomic Requirement**     | A requirement that addresses exactly one thing and cannot be split further |
+| **TBD (To Be Determined)** | A placeholder indicating the requirement is incomplete                     |
+| **Rationale**              | The justification or reason behind a requirement                           |
+| **SHALL vs. SHOULD**       | "Shall" = mandatory requirement; "Should" = recommended but not mandatory  |
+
+---
+
+# MODULE 6 — Use Cases & User Stories
+
+---
+
+## Lesson 6.1 — Use Cases
+
+### What is a Use Case?
+
+A **Use Case** describes how a user (or system) interacts with a system to achieve a specific goal. It captures the _sequence of interactions_ between the user and the system.
+
+Developed by **Ivar Jacobson** in the late 1980s and formally incorporated into **UML (Unified Modeling Language)**.
+
+### Key Concepts
+
+| Term               | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| **Actor**          | Anyone or anything that interacts with the system (user, admin, external system) |
+| **Use Case**       | A specific goal the actor wants to achieve using the system                      |
+| **Scenario**       | A specific path through a use case                                               |
+| **Main Flow**      | The "happy path" — the normal sequence with no errors                            |
+| **Alternate Flow** | A valid but less common sequence                                                 |
+| **Exception Flow** | What happens when something goes wrong                                           |
+
+### Use Case Diagram (UML)
+
+```
+                ┌──────────────────────────┐
+                │        System            │
+                │                          │
+   [Customer]───│──► (Place Order)         │
+                │                          │
+   [Customer]───│──► (Track Order)         │
+                │         │                │
+                │         └──►(Send Email) │◄───[Email Service]
+                │                          │
+   [Admin]──────│──► (Manage Products)     │
+                │                          │
+                └──────────────────────────┘
+```
+
+### Use Case Relationships
+
+| Relationship       | Meaning                                             |
+| ------------------ | --------------------------------------------------- |
+| **Include**        | A use case _always_ calls another use case          |
+| **Extend**         | A use case _conditionally_ adds behavior to another |
+| **Generalization** | A specialized use case inherits from a general one  |
+
+### Use Case Description Template
+
+```
+USE CASE: UC-001 — Place Order
+
+Actor:        Customer
+Precondition: Customer is logged in; cart has at least one item
+Postcondition: Order is confirmed; inventory is reduced
+
+Main Flow:
+1. Customer clicks "Checkout"
+2. System displays order summary
+3. Customer selects payment method
+4. Customer confirms order
+5. System processes payment (Include: Process Payment)
+6. System sends confirmation email (Include: Send Confirmation)
+7. System displays success message
+
+Alternate Flow (3a): Customer selects new shipping address
+3a.1 Customer clicks "Add New Address"
+3a.2 System displays address form
+3a.3 Customer enters and saves address
+3a.4 Returns to step 4
+
+Exception Flow (5a): Payment fails
+5a.1 System displays payment error message
+5a.2 Customer is returned to step 3
+```
+
+### 🗝️ Industry Terms
+
+| Term               | Definition                                                                   |
+| ------------------ | ---------------------------------------------------------------------------- |
+| **Use Case**       | A description of how an actor uses a system to achieve a goal                |
+| **Actor**          | A role that interacts with the system                                        |
+| **Precondition**   | What must be true before a use case can start                                |
+| **Postcondition**  | What is true after a use case successfully completes                         |
+| **Happy Path**     | The main success scenario with no errors or deviations                       |
+| **Alternate Flow** | A valid variant of the main flow                                             |
+| **Exception Flow** | What happens when an error or unexpected event occurs                        |
+| **UML**            | Unified Modeling Language — a standard visual language for software modeling |
+| **Include**        | A use case relationship where one always calls another                       |
+| **Extend**         | A use case relationship where one conditionally adds to another              |
+
+---
+
+## Lesson 6.2 — User Stories
+
+### What is a User Story?
+
+A **User Story** is a short, informal description of a feature from the perspective of the end user. It is the primary requirements artifact in **Agile** methodologies.
+
+**Standard Format (Connextra Template):**
+
+```
+As a [type of user],
+I want [some goal or action],
+So that [some reason or benefit].
+```
+
+**Examples:**
+
+```
+As a registered customer,
+I want to save multiple delivery addresses,
+So that I can quickly checkout without re-entering my address.
+
+As a store administrator,
+I want to receive a low-stock alert via email,
+So that I can reorder products before they run out.
+```
+
+### Characteristics of Good User Stories — INVEST
+
+| Letter | Meaning                                     |
+| ------ | ------------------------------------------- |
+| **I**  | Independent — can be developed in any order |
+| **N**  | Negotiable — details can be discussed       |
+| **V**  | Valuable — delivers value to the user       |
+| **E**  | Estimable — team can estimate the effort    |
+| **S**  | Small — fits within a single sprint         |
+| **T**  | Testable — has clear acceptance criteria    |
+
+### Acceptance Criteria
+
+Every user story must have **Acceptance Criteria (AC)** — the conditions that must be met for the story to be considered "done."
+
+**Format: Given / When / Then (Gherkin Syntax)**
+
+```
+Scenario: Saving a new delivery address
+  Given I am a logged-in customer on the checkout page
+  When I click "Add New Address" and fill in valid address details
+  Then the address should be saved to my profile
+  And the new address should be automatically selected for this order
+```
+
+### User Story vs. Use Case
+
+| Aspect      | User Story           | Use Case                    |
+| ----------- | -------------------- | --------------------------- |
+| **Format**  | Short, informal card | Detailed formal document    |
+| **Focus**   | User value           | System behavior             |
+| **Detail**  | High level           | Low to high level           |
+| **Used In** | Agile projects       | Waterfall/UP projects       |
+| **Size**    | Fits a sprint        | Can cover many interactions |
+
+### Epics and Themes
+
+```
+Theme (Strategic Goal)
+    └── Epic (Large Feature)
+            └── User Story
+                    └── Task (Technical work item)
+```
+
+- **Theme** — A collection of related epics aligned to a strategic goal
+- **Epic** — A large user story that must be broken down before it can be worked on
+- **User Story** — Small enough to complete in one sprint (1–2 weeks)
+- **Task** — A technical subtask within a user story (e.g., "Create database table")
+
+### 🗝️ Industry Terms
+
+| Term                         | Definition                                                                      |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| **User Story**               | A short description of a feature from a user's perspective                      |
+| **Acceptance Criteria (AC)** | Conditions that must be satisfied for a story to be "done"                      |
+| **Gherkin**                  | A plain-English syntax (Given/When/Then) for writing acceptance criteria        |
+| **Epic**                     | A large user story that spans multiple sprints and must be decomposed           |
+| **Theme**                    | A collection of epics or stories aligned to a strategic initiative              |
+| **Sprint**                   | A time-boxed development iteration (typically 1–4 weeks) in Agile               |
+| **Definition of Done (DoD)** | A checklist of criteria that must be met for any work to be considered complete |
+| **Story Point**              | A unit of estimation for user stories based on complexity and effort            |
+| **Velocity**                 | The amount of work (story points) a team completes per sprint                   |
+
+---
+
+# MODULE 7 — Requirements Analysis & Modelling
+
+---
+
+## Lesson 7.1 — Requirements Analysis Overview
+
+### Purpose of Analysis
+
+Requirements analysis goes beyond gathering — it involves **evaluating, organizing, and structuring** the collected requirements to ensure they are:
+
+- Feasible
+- Consistent
+- Complete
+- Testable
+- Prioritized
+
+### Types of Analysis Activities
+
+1. **Completeness checking** — Are there gaps? What's missing?
+2. **Consistency checking** — Do any requirements contradict each other?
+3. **Feasibility analysis** — Can this be built with available time, budget, and technology?
+4. **Prioritization** — Which requirements deliver the most value?
+5. **Risk identification** — Which requirements carry the most uncertainty or risk?
+
+---
+
+## Lesson 7.2 — Data Flow Diagrams (DFD)
+
+### Overview
+
+A **Data Flow Diagram (DFD)** models how data flows through a system — from inputs to processes to outputs and data stores. It does _not_ show the sequence or timing of events.
+
+### DFD Symbols (Yourdon-DeMarco Notation)
+
+| Symbol               | Meaning                            |
+| -------------------- | ---------------------------------- |
+| Rectangle / Square   | External Entity (data source/sink) |
+| Circle / Bubble      | Process (transforms data)          |
+| Open-ended rectangle | Data Store (database/file)         |
+| Arrow                | Data Flow                          |
+
+### DFD Levels
+
+- **Context Diagram (Level 0)** — Entire system as a single process; shows only external entities and data flows
+- **Level 1 DFD** — Expands the single process into major sub-processes
+- **Level 2 DFD** — Further explodes each sub-process
+
+### Example: Online Order System (Level 0)
+
+```
+[Customer] ──── Order Details ───► (Online Order System) ──── Order Confirmation ───► [Customer]
+                                            │
+                                            ▼
+                                       [Inventory DB]
+                                            │
+                                            ▼
+                                [Supplier] ◄─── Replenishment Request
+```
+
+### 🗝️ Industry Terms
+
+| Term                        | Definition                                                                  |
+| --------------------------- | --------------------------------------------------------------------------- |
+| **DFD (Data Flow Diagram)** | A diagram showing how data flows through a system                           |
+| **Context Diagram**         | A Level 0 DFD showing the system as a single process with external entities |
+| **External Entity**         | A person, system, or organization outside the system boundary               |
+| **Data Store**              | A repository where data is held (database, file, etc.)                      |
+| **Process**                 | A transformation of data within the system                                  |
+| **Decomposition**           | Breaking a high-level process down into lower-level detail                  |
+
+---
+
+## Lesson 7.3 — Entity-Relationship Diagrams (ERD)
+
+### Overview
+
+An **Entity-Relationship Diagram (ERD)** models the _data_ that a system must manage — the entities, their attributes, and relationships between them. It is a critical artifact for database design.
+
+### Core Concepts
+
+| Concept          | Description                                | Example                            |
+| ---------------- | ------------------------------------------ | ---------------------------------- |
+| **Entity**       | A real-world thing the system manages      | Customer, Order, Product           |
+| **Attribute**    | A property of an entity                    | Customer: Name, Email, Phone       |
+| **Relationship** | How entities are connected                 | Customer _places_ Order            |
+| **Cardinality**  | The numerical constraint on a relationship | One customer can place many orders |
+
+### Cardinality Notations
+
+```
+One-to-One (1:1):    [Employee] ────────── [Parking Space]
+One-to-Many (1:N):   [Customer] ──────────< [Order]
+Many-to-Many (M:N):  [Student] >──────────< [Course]
+```
+
+### 🗝️ Industry Terms
+
+| Term                                  | Definition                                                            |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| **ERD (Entity-Relationship Diagram)** | A diagram modeling data entities and their relationships              |
+| **Entity**                            | A distinct object or concept about which data is stored               |
+| **Attribute**                         | A property or characteristic of an entity                             |
+| **Primary Key**                       | A unique identifier for each record in an entity                      |
+| **Foreign Key**                       | An attribute in one entity that references the primary key of another |
+| **Cardinality**                       | The number relationship between entities (1:1, 1:N, M:N)              |
+| **Normalization**                     | The process of structuring a database to reduce redundancy            |
+
+---
+
+## Lesson 7.4 — State Diagrams & Process Modelling
+
+### State Diagrams
+
+A **State Diagram (State Machine)** models the different states an object can be in and the events that cause transitions between states.
+
+**Example: Order States**
+
+```
+[New] ──(Payment Received)──► [Confirmed] ──(Shipped)──► [In Transit]
+  │                                                            │
+  │(Cancelled)                                        (Delivered)
+  ▼                                                            ▼
+[Cancelled] ◄──(Return Requested)──────────────────── [Delivered]
+```
+
+### Business Process Model and Notation (BPMN)
+
+**BPMN** is a standard graphical notation for representing business processes. It is more detailed than flowcharts and is used to model both current-state and future-state processes.
+
+Key symbols:
+
+- **Events** — Start, End, Intermediate (circles)
+- **Activities/Tasks** — Rounded rectangles
+- **Gateways** — Diamonds (decision points)
+- **Sequence Flow** — Solid arrows
+- **Swim Lanes** — Horizontal/vertical lanes showing who does what
+
+### 🗝️ Industry Terms
+
+| Term              | Definition                                                                   |
+| ----------------- | ---------------------------------------------------------------------------- |
+| **State Diagram** | A diagram showing states an object can be in and transitions between states  |
+| **State**         | A condition or situation of an object at a specific point in time            |
+| **Transition**    | A change from one state to another triggered by an event                     |
+| **BPMN**          | Business Process Model and Notation — a standard for process modeling        |
+| **Swim Lane**     | A visual divider in a process diagram showing which actor performs each task |
+| **Gateway**       | A decision point in a process that determines which path to follow           |
+| **Happy Path**    | The process flow with no errors or exceptional conditions                    |
+
+---
+
+# MODULE 8 — Requirements Validation & Verification
+
+---
+
+## Lesson 8.1 — Validation vs. Verification
+
+### The Core Distinction
+
+> **Verification:** "Are we building the product right?"
+> **Validation:** "Are we building the right product?"
+
+| Aspect       | Verification                     | Validation                                   |
+| ------------ | -------------------------------- | -------------------------------------------- |
+| **Question** | Does it match the specification? | Does it meet the stakeholder's actual needs? |
+| **Focus**    | Process and documentation        | Product and outcome                          |
+| **Timing**   | During development               | End of phase or project                      |
+| **Method**   | Reviews, walkthroughs, audits    | Testing, demos, user acceptance              |
+
+### Why Both Matter
+
+A system can pass verification (it matches the SRS exactly) but fail validation (the SRS was wrong to begin with). Both checks are necessary.
+
+---
+
+## Lesson 8.2 — Reviews and Inspections
+
+### Types of Reviews
+
+**Informal Review:**
+
+- Developer sends document to a colleague for a quick read-through
+- No formal process, no documentation
+
+**Walkthrough:**
+
+- Author presents the document to a group
+- Participants ask questions and raise issues
+- Less rigorous than an inspection
+
+**Technical Review:**
+
+- A structured review by peers to assess technical correctness
+- Issues are documented and tracked
+
+**Formal Inspection (Fagan Inspection):**
+
+- The most rigorous form — follows a defined process
+- Roles: Moderator, Author, Inspector, Scribe
+- Produces a formal defect report
+- Defects are classified by type and severity
+
+### Review Roles
+
+| Role          | Responsibility                    |
+| ------------- | --------------------------------- |
+| **Moderator** | Plans and facilitates the review  |
+| **Author**    | The person who wrote the document |
+| **Inspector** | Reviews the document for defects  |
+| **Scribe**    | Records all issues found          |
+
+### 🗝️ Industry Terms
+
+| Term                    | Definition                                                             |
+| ----------------------- | ---------------------------------------------------------------------- |
+| **Review**              | A manual examination of a document or artifact to find defects         |
+| **Walkthrough**         | An informal review where the author presents work to a group           |
+| **Inspection**          | A formal, structured review process with defined roles                 |
+| **Fagan Inspection**    | A rigorous formal inspection process developed by Michael Fagan at IBM |
+| **Defect**              | An error, flaw, or problem found in a requirements document            |
+| **Moderator**           | The person who plans and runs a review session                         |
+| **Entry/Exit Criteria** | Conditions that must be met to begin or conclude an activity           |
+
+---
+
+## Lesson 8.3 — Requirements Testing & Prototyping
+
+### Testing Requirements
+
+Before code is written, you can test requirements through:
+
+1. **Test Case Derivation** — Write test cases directly from requirements. If you can't write a test case, the requirement is not testable.
+2. **Model Checking** — Formally verify properties of requirement models
+3. **Simulation** — Simulate the system behavior based on requirements
+
+### User Acceptance Testing (UAT)
+
+**UAT** is the final validation phase where end users test the system to confirm it meets their requirements before go-live.
+
+**Process:**
+
+1. Define UAT scenarios from requirements
+2. Prepare test data
+3. Execute tests with real users
+4. Document pass/fail results
+5. Obtain formal sign-off
+
+### Prototyping for Validation
+
+Showing users a prototype (low or high fidelity) and watching them interact with it is one of the best validation techniques.
+
+### 🗝️ Industry Terms
+
+| Term                              | Definition                                                                    |
+| --------------------------------- | ----------------------------------------------------------------------------- |
+| **UAT (User Acceptance Testing)** | Testing by end users to confirm the system meets their requirements           |
+| **Test Case**                     | A documented set of conditions and expected results for testing a requirement |
+| **Test Script**                   | A step-by-step guide for executing a test case                                |
+| **Traceability Matrix**           | A table linking requirements to test cases to ensure full coverage            |
+| **Sign-off**                      | Formal written approval from a stakeholder that requirements are accepted     |
+| **Regression Testing**            | Re-testing previously passed tests after changes are made                     |
+| **Go-Live**                       | The point at which a system is deployed for production use                    |
+
+---
+
+# MODULE 9 — Requirements Management & Traceability
+
+---
+
+## Lesson 9.1 — Requirements Management Overview
+
+### What is Requirements Management?
+
+**Requirements Management (RM)** is the process of managing changes to requirements throughout the project lifecycle. Once a requirements baseline is established, all changes must be controlled, evaluated, and approved.
+
+### The Requirements Baseline
+
+A **baseline** is a formally approved, stable version of requirements. It serves as the reference point for:
+
+- Planning and estimation
+- Change control
+- Progress tracking
+
+### Change Control Process
+
+```
+Change Request → Impact Analysis → Approval/Rejection → Implementation → Verification → Documentation Update
+```
+
+**Change Control Board (CCB):**
+A group of stakeholders responsible for reviewing and approving or rejecting change requests.
+
+### 🗝️ Industry Terms
+
+| Term                           | Definition                                                                                    |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| **Requirements Management**    | The discipline of tracking and controlling changes to requirements                            |
+| **Baseline**                   | A formally approved version of requirements that can only be changed through a formal process |
+| **Change Request (CR)**        | A formal proposal to modify a requirement or specification                                    |
+| **Change Control Board (CCB)** | A committee that reviews and approves changes to baselined requirements                       |
+| **Impact Analysis**            | Assessing the effect of a proposed change on other requirements, design, and schedule         |
+| **Version Control**            | A system for managing and tracking changes to documents or code                               |
+| **Configuration Management**   | The discipline of managing changes to a system's components                                   |
+
+---
+
+## Lesson 9.2 — Requirements Traceability
+
+### What is Traceability?
+
+**Traceability** is the ability to follow the life of a requirement forwards (to design, code, and tests) and backwards (to business objectives and stakeholder needs).
+
+### Traceability Matrix (RTM)
+
+A **Requirements Traceability Matrix (RTM)** is a table that maps requirements to related artifacts.
+
+**Example RTM:**
+
+| Req ID  | Requirement Description | Business Objective       | Design Ref | Test Case | Status  |
+| ------- | ----------------------- | ------------------------ | ---------- | --------- | ------- |
+| FR-001  | User login with OTP     | BO-003: Improve Security | DES-012    | TC-045    | Passed  |
+| FR-002  | Export report to PDF    | BO-007: Reporting        | DES-020    | TC-067    | In Test |
+| NFR-001 | Page load < 2 seconds   | BO-005: UX Quality       | DES-015    | TC-089    | Passed  |
+
+### Types of Traceability
+
+| Type                           | Direction                          | Purpose                          |
+| ------------------------------ | ---------------------------------- | -------------------------------- |
+| **Backward Traceability**      | Requirement → Business Objective   | Why does this requirement exist? |
+| **Forward Traceability**       | Requirement → Design → Code → Test | Has this been built and tested?  |
+| **Bidirectional Traceability** | Both directions                    | Full coverage analysis           |
+
+### 🗝️ Industry Terms
+
+| Term                                       | Definition                                                   |
+| ------------------------------------------ | ------------------------------------------------------------ |
+| **RTM (Requirements Traceability Matrix)** | A document linking requirements to design, code, and tests   |
+| **Forward Traceability**                   | Linking from requirements forward to design, code, and tests |
+| **Backward Traceability**                  | Linking from requirements back to business objectives        |
+| **Coverage**                               | The degree to which requirements are addressed by test cases |
+| **Orphan Requirement**                     | A requirement with no corresponding test case                |
+| **Gold Plating**                           | Implementing features beyond the agreed requirements         |
+
+---
+
+## Lesson 9.3 — Requirements in Agile: Backlog Management
+
+### The Product Backlog
+
+In Agile, the **Product Backlog** is the living list of all requirements (as user stories, epics, or tasks) for the product. It is:
+
+- Ordered by priority (most valuable at the top)
+- Continuously refined and updated
+- Owned by the **Product Owner**
+
+### Backlog Refinement (Grooming)
+
+Regular sessions where the team:
+
+- Reviews and discusses upcoming backlog items
+- Adds detail to user stories
+- Estimates effort (story points)
+- Splits large stories into smaller ones
+- Removes outdated items
+
+### Sprint Planning
+
+At the beginning of each sprint, the team selects the highest-priority stories from the backlog to form the **Sprint Backlog**.
+
+### 🗝️ Industry Terms
+
+| Term                          | Definition                                                                  |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| **Product Backlog**           | The prioritized list of all features and requirements for the product       |
+| **Sprint Backlog**            | The subset of product backlog items selected for a specific sprint          |
+| **Backlog Refinement**        | The ongoing process of reviewing, estimating, and updating backlog items    |
+| **Story Splitting**           | Breaking a large user story into smaller, independently deliverable stories |
+| **Definition of Ready (DoR)** | Criteria a user story must meet before it can be included in a sprint       |
+| **Kanban Board**              | A visual board showing work items in stages (To Do, In Progress, Done)      |
+
+---
+
+# MODULE 10 — Agile Requirements Engineering
+
+---
+
+## Lesson 10.1 — Requirements in Agile vs. Waterfall
+
+### Waterfall Requirements Approach
+
+In traditional **Waterfall** projects:
+
+- All requirements are gathered and documented upfront
+- Requirements are frozen before development begins
+- Changes are formally controlled and expensive
+- SRS document is the primary artifact
+
+### Agile Requirements Approach
+
+In **Agile** projects:
+
+- Requirements are discovered incrementally and iteratively
+- Requirements evolve as understanding grows
+- Change is expected and welcomed
+- User stories, acceptance criteria, and the product backlog are primary artifacts
+
+### Key Differences
+
+| Aspect                            | Waterfall                   | Agile                                |
+| --------------------------------- | --------------------------- | ------------------------------------ |
+| **When requirements are defined** | Upfront, before development | Continuously, throughout the project |
+| **Level of detail upfront**       | High                        | Just enough (JIDOKA principle)       |
+| **How changes are handled**       | Formal change control       | Expected and embraced                |
+| **Primary artifact**              | SRS / BRD                   | Product Backlog / User Stories       |
+| **Requirements owner**            | Business Analyst            | Product Owner                        |
+| **Validation**                    | End of project (UAT)        | Every sprint (sprint review)         |
+
+### Hybrid Approaches
+
+Many organizations use a **hybrid** approach — some upfront analysis and documentation, combined with iterative delivery. Common in regulated industries.
+
+---
+
+## Lesson 10.2 — Agile Ceremonies and Requirements
+
+### Sprint Review (Demo)
+
+At the end of each sprint, the team demonstrates completed work to stakeholders. This is a _validation_ event — stakeholders confirm whether what was built matches what was needed.
+
+### Sprint Retrospective
+
+A team reflection on the process — not the product. Requirements engineers use this to improve elicitation, documentation, and communication practices.
+
+### Daily Stand-up (Daily Scrum)
+
+A 15-minute daily meeting where each team member answers:
+
+1. What did I work on yesterday?
+2. What am I working on today?
+3. Are there any blockers?
+
+Requirements Engineers identify blockers related to unclear or incomplete requirements.
+
+### 🗝️ Industry Terms
+
+| Term                              | Definition                                                                 |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| **Sprint**                        | A fixed time period (usually 1–4 weeks) for development work               |
+| **Sprint Review**                 | End-of-sprint demo where work is shown to stakeholders for validation      |
+| **Sprint Retrospective**          | A meeting to reflect on and improve the team's process                     |
+| **Daily Stand-up**                | A brief daily sync to share progress and identify blockers                 |
+| **Scrum**                         | An Agile framework with defined roles, ceremonies, and artifacts           |
+| **Kanban**                        | An Agile method focusing on visualizing work and limiting work-in-progress |
+| **SAFe (Scaled Agile Framework)** | A framework for applying Agile practices at enterprise scale               |
+| **PI Planning**                   | Program Increment Planning — a large planning event in SAFe                |
+
+---
+
+## Lesson 10.3 — Product Vision & Roadmap
+
+### Product Vision
+
+A clear, inspiring statement of what the product aims to achieve. It guides all requirements decisions.
+
+**Product Vision Template (Geoffrey Moore):**
+
+```
+FOR [target customer]
+WHO [has a need or problem]
+THE [product name] IS A [product category]
+THAT [key benefit/value proposition]
+UNLIKE [main competitor or current solution]
+OUR PRODUCT [differentiator]
+```
+
+### Product Roadmap
+
+A high-level plan showing when features and capabilities will be delivered. It aligns stakeholders on what is coming without committing to detailed scope.
+
+Types:
+
+- **Theme-based roadmap** — Organized by strategic themes
+- **Goal-based roadmap** — Organized by business outcomes
+- **Timeline-based roadmap** — Shows features on a calendar
+
+### 🗝️ Industry Terms
+
+| Term                                 | Definition                                                                     |
+| ------------------------------------ | ------------------------------------------------------------------------------ |
+| **Product Vision**                   | A concise statement of the product's long-term purpose and value               |
+| **Product Roadmap**                  | A high-level plan showing the direction and timeline for product delivery      |
+| **MVP (Minimum Viable Product)**     | The simplest version of a product that delivers core value and can be released |
+| **MMP (Minimum Marketable Product)** | The smallest release that is commercially viable                               |
+| **Value Proposition**                | The unique benefit a product offers to its customers                           |
+| **OKR (Objectives and Key Results)** | A goal-setting framework for aligning teams to measurable outcomes             |
+
+---
+
+# MODULE 11 — Requirements in Large-Scale & Complex Systems
+
+---
+
+## Lesson 11.1 — Requirements Challenges at Scale
+
+### Why Scale Changes Everything
+
+In large organizations or systems, requirement engineering faces additional complexity:
+
+- Hundreds of stakeholders across multiple departments or countries
+- Multiple teams working on different components simultaneously
+- Long project durations (months to years)
+- Regulatory and legal constraints
+- Legacy system integration
+
+### Enterprise-Level Requirements Documents
+
+- **Vision Document** — High-level product/project vision
+- **Business Case** — Justification for investment
+- **System Requirements Specification (SyRS)** — For hardware+software systems
+- **Interface Control Document (ICD)** — Defines interfaces between components
+
+### Systems Engineering Approach
+
+For large complex systems (aerospace, defense, critical infrastructure), **Systems Engineering** provides a rigorous framework:
+
+```
+Stakeholder Needs → System Requirements → Architecture → Component Requirements → Implementation
+```
+
+Standards: **ISO/IEC/IEEE 15288** (Systems Life Cycle), **INCOSE Systems Engineering Handbook**
+
+### 🗝️ Industry Terms
+
+| Term                                         | Definition                                                              |
+| -------------------------------------------- | ----------------------------------------------------------------------- |
+| **Systems Engineering**                      | An interdisciplinary approach to designing and managing complex systems |
+| **SyRS (System Requirements Specification)** | A requirements spec for a combined hardware/software system             |
+| **ICD (Interface Control Document)**         | A document defining all interfaces between system components            |
+| **INCOSE**                                   | International Council on Systems Engineering                            |
+| **MBSE (Model-Based Systems Engineering)**   | Using models as the primary artifacts instead of documents              |
+| **SysML**                                    | Systems Modeling Language — an extension of UML for systems engineering |
+
+---
+
+## Lesson 11.2 — Non-Functional Requirements in Depth
+
+### Architecture Significant Requirements (ASRs)
+
+Some NFRs have a profound impact on the system's architecture — they are called **Architecturally Significant Requirements (ASRs)**.
+
+Examples:
+
+- "System must support 1 million concurrent users" (scalability → microservices, load balancing)
+- "System must achieve 99.999% uptime" (availability → active-active redundancy)
+- "All data must be encrypted at rest and in transit" (security → encryption architecture)
+
+### The Quality Attribute Workshop (QAW)
+
+A structured technique for eliciting and prioritizing NFRs:
+
+1. Identify business drivers
+2. Identify architectural drivers
+3. Identify quality attribute scenarios
+4. Prioritize by business importance and architectural impact
+
+### Quality Attribute Scenarios
+
+A **Quality Attribute Scenario** is a structured way to specify an NFR:
+
+```
+Source → Stimulus → Environment → Artifact → Response → Response Measure
+
+Example (Performance):
+Source:       1,000 concurrent users
+Stimulus:     Submit a search query
+Environment:  Normal operating conditions
+Artifact:     Search service
+Response:     Results are returned
+Response Measure: Within 2 seconds, 95th percentile
+```
+
+### 🗝️ Industry Terms
+
+| Term                                              | Definition                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------------ |
+| **ASR (Architecturally Significant Requirement)** | A requirement that has major impact on the system's architecture   |
+| **Quality Attribute Workshop (QAW)**              | A structured method for eliciting architectural requirements       |
+| **Scenario**                                      | A concrete instance of a quality attribute requirement             |
+| **Latency**                                       | The time delay between a request and the corresponding response    |
+| **Throughput**                                    | The number of operations processed per unit of time                |
+| **Fault Tolerance**                               | A system's ability to continue operating when some components fail |
+| **Redundancy**                                    | Duplicate components to improve reliability and availability       |
+
+---
+
+# MODULE 12 — Tools, Standards & Career Path
+
+---
+
+## Lesson 12.1 — Requirements Management Tools
+
+### Category 1: Document-Based Tools
+
+Used for creating and managing requirements in documents:
+
+- **Microsoft Word / Google Docs** — Basic, widely used
+- **Confluence** — Wiki-based collaboration tool (popular with Agile teams)
+
+### Category 2: Dedicated RM Tools
+
+Purpose-built tools for managing requirements:
+
+| Tool                       | Key Features                          | Common Use                  |
+| -------------------------- | ------------------------------------- | --------------------------- |
+| **JIRA**                   | User stories, epics, backlog, sprints | Agile projects              |
+| **IBM DOORS / DOORS Next** | Traceability, baseline management     | Aerospace, defense          |
+| **Polarion**               | Requirements + test management        | Automotive, medical devices |
+| **Helix RM (Perforce)**    | Requirements traceability             | Regulated industries        |
+| **Azure DevOps**           | Work items, user stories, backlogs    | Microsoft ecosystem         |
+| **Aha!**                   | Product roadmaps and strategy         | Product management          |
+
+### Category 3: Modelling Tools
+
+- **Lucidchart** — DFD, ERD, UML diagrams
+- **Draw.io** / **diagrams.net** — Free diagramming tool
+- **Enterprise Architect (Sparx)** — Full UML/SysML modelling
+- **Visio** — Microsoft process and diagram tool
+- **Balsamiq / Figma** — Wireframing and prototyping
+
+### 🗝️ Industry Terms
+
+| Term                  | Definition                                                           |
+| --------------------- | -------------------------------------------------------------------- |
+| **JIRA**              | A popular project and issue tracking tool by Atlassian               |
+| **IBM DOORS**         | Dynamic Object-Oriented Requirements System — an enterprise RM tool  |
+| **Confluence**        | A team wiki and collaboration tool by Atlassian                      |
+| **Azure DevOps**      | Microsoft's suite of DevOps and project management tools             |
+| **Traceability Tool** | Software that manages requirement links across the project lifecycle |
+
+---
+
+## Lesson 12.2 — Standards & Frameworks
+
+### Key Standards
+
+| Standard                                        | Scope                                            |
+| ----------------------------------------------- | ------------------------------------------------ |
+| **ISO/IEC/IEEE 29148**                          | Requirements engineering process and SRS content |
+| **IEEE 830**                                    | Legacy SRS standard (still referenced)           |
+| **ISO/IEC/IEEE 15288**                          | Systems life cycle processes                     |
+| **BABOK (Business Analysis Body of Knowledge)** | The guide to business analysis practices by IIBA |
+| **PMBOK**                                       | Project Management Body of Knowledge by PMI      |
+| **SWEBOK**                                      | Software Engineering Body of Knowledge by IEEE   |
+
+### Professional Certifications
+
+| Certification | Issuing Body   | Focus                                               |
+| ------------- | -------------- | --------------------------------------------------- |
+| **CBAP**      | IIBA           | Certified Business Analysis Professional            |
+| **CCBA**      | IIBA           | Certification in Capability in Business Analysis    |
+| **PMI-PBA**   | PMI            | Professional in Business Analysis                   |
+| **IREB CPRE** | IREB           | Certified Professional for Requirements Engineering |
+| **CSM**       | Scrum Alliance | Certified Scrum Master                              |
+| **CSPO**      | Scrum Alliance | Certified Scrum Product Owner                       |
+
+### 🗝️ Industry Terms
+
+| Term                                                    | Definition                                                                 |
+| ------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **IIBA (International Institute of Business Analysis)** | The professional body for business analysts                                |
+| **IREB**                                                | International Requirements Engineering Board                               |
+| **BABOK**                                               | Business Analysis Body of Knowledge — the standard guide for BAs           |
+| **CBAP**                                                | Certified Business Analysis Professional — a leading BA certification      |
+| **CPRE**                                                | Certified Professional for Requirements Engineering — IREB's certification |
+| **PMI**                                                 | Project Management Institute                                               |
+
+---
+
+## Lesson 12.3 — Career Path in Requirements Engineering
+
+### Entry-Level Roles
+
+- **Junior Business Analyst**
+- **Requirements Analyst**
+- **Systems Analyst**
+- **Product Analyst**
+
+### Mid-Level Roles
+
+- **Business Analyst**
+- **Functional Consultant**
+- **Product Manager**
+- **Scrum Product Owner**
+
+### Senior / Expert Roles
+
+- **Senior Business Analyst**
+- **Lead Business Analyst / BA Manager**
+- **Enterprise Architect**
+- **Chief Product Officer (CPO)**
+- **Requirements Engineering Specialist** (Systems Engineering)
+
+### Skills to Build
+
+**Technical Skills:**
+
+- UML & BPMN modelling
+- SQL basics (for data requirements)
+- API understanding (REST, SOAP)
+- Agile methodologies (Scrum, SAFe)
+- Requirements tools (JIRA, DOORS, Azure DevOps)
+
+**Soft Skills:**
+
+- Communication and presentation
+- Facilitation and negotiation
+- Critical thinking and problem solving
+- Stakeholder management
+- Conflict resolution
+
+---
+
+## Lesson 12.4 — Common Industry Challenges & Anti-Patterns
+
+### Anti-Patterns to Avoid
+
+| Anti-Pattern                | Description                                       | Solution                                                 |
+| --------------------------- | ------------------------------------------------- | -------------------------------------------------------- |
+| **Gold Plating**            | Building more than was requested                  | Stick to agreed requirements; use change control         |
+| **Analysis Paralysis**      | Over-analyzing requirements without progress      | Timebox analysis; use iterative approach                 |
+| **Vague Requirements**      | "System should be fast and user-friendly"         | Apply SMART criteria; add measurable acceptance criteria |
+| **Missing NFRs**            | Only functional requirements are documented       | Always include a dedicated NFR section                   |
+| **Stakeholder Exclusion**   | Key stakeholders not involved                     | Use stakeholder register; hold regular reviews           |
+| **Scope Creep**             | Requirements expand without formal change control | Maintain baseline; enforce change control process        |
+| **Requirements Volatility** | Frequent, uncontrolled changes to requirements    | Establish baseline early; use agile where appropriate    |
+
+### The Requirements Engineer's Mindset
+
+Great requirements engineers share certain traits:
+
+- **Curiosity** — They always ask "why?"
+- **Empathy** — They understand users' real problems
+- **Clarity** — They communicate complex ideas simply
+- **Skepticism** — They question assumptions
+- **Persistence** — They follow up until requirements are truly understood
+- **Adaptability** — They work effectively in both Agile and traditional environments
+
+---
+
+# 📖 Glossary of Key Industry Terms
+
+| Term                      | Definition                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------- |
+| **Acceptance Criteria**   | Conditions that must be met for a requirement to be accepted as done          |
+| **Actor**                 | A role that interacts with the system in a use case                           |
+| **Agile**                 | An iterative, incremental approach to software development                    |
+| **Analysis Paralysis**    | Excessive analysis that delays decision-making and progress                   |
+| **API**                   | Application Programming Interface — how software components communicate       |
+| **As-Is Process**         | The current state of a business process before the new system                 |
+| **ASR**                   | Architecturally Significant Requirement — one that shapes system architecture |
+| **Assumption**            | A condition accepted as true without proof                                    |
+| **Backlog**               | A prioritized list of requirements or tasks to be completed                   |
+| **BA (Business Analyst)** | Professional who elicits, analyzes, and documents requirements                |
+| **Baseline**              | A formally approved, stable version of requirements                           |
+| **BRD**                   | Business Requirements Document                                                |
+| **BPMN**                  | Business Process Model and Notation                                           |
+| **CBAP**                  | Certified Business Analysis Professional                                      |
+| **CCB**                   | Change Control Board — reviews and approves requirement changes               |
+| **Change Request**        | A formal proposal to modify an approved requirement                           |
+| **Constraint**            | A restriction that limits the solution options                                |
+| **DFD**                   | Data Flow Diagram                                                             |
+| **DoD**                   | Definition of Done — criteria for a completed work item                       |
+| **Epic**                  | A large user story that spans multiple sprints                                |
+| **Elicitation**           | The active process of gathering requirements from sources                     |
+| **ERD**                   | Entity-Relationship Diagram                                                   |
+| **Feasibility**           | The degree to which a requirement is technically and practically achievable   |
+| **FR**                    | Functional Requirement                                                        |
+| **Gherkin**               | Given/When/Then syntax for writing acceptance criteria                        |
+| **Gold Plating**          | Building more than what was required                                          |
+| **Happy Path**            | The main success scenario with no errors                                      |
+| **Impact Analysis**       | Evaluating the effect of a proposed change                                    |
+| **INVEST**                | Independent, Negotiable, Valuable, Estimable, Small, Testable                 |
+| **JAD**                   | Joint Application Development — a collaborative requirements workshop         |
+| **JIRA**                  | A popular Agile project tracking tool                                         |
+| **KPI**                   | Key Performance Indicator                                                     |
+| **MVP**                   | Minimum Viable Product                                                        |
+| **MoSCoW**                | Must, Should, Could, Won't — a prioritization technique                       |
+| **NFR**                   | Non-Functional Requirement                                                    |
+| **PO**                    | Product Owner — Agile role responsible for the product backlog                |
+| **Prototype**             | An early model of a system for exploration and validation                     |
+| **RACI**                  | Responsible, Accountable, Consulted, Informed                                 |
+| **Requirement**           | A condition or capability needed by a stakeholder to solve a problem          |
+| **RTM**                   | Requirements Traceability Matrix                                              |
+| **Scope Creep**           | Uncontrolled expansion of project scope                                       |
+| **SME**                   | Subject Matter Expert                                                         |
+| **Sprint**                | A time-boxed Agile development iteration                                      |
+| **SRS**                   | Software Requirements Specification                                           |
+| **Stakeholder**           | Any party with an interest in the system                                      |
+| **Story Point**           | A unit of effort estimation in Agile                                          |
+| **TBD**                   | To Be Determined — an incomplete requirement placeholder                      |
+| **To-Be Process**         | The desired future state after system implementation                          |
+| **UAT**                   | User Acceptance Testing                                                       |
+| **UML**                   | Unified Modeling Language                                                     |
+| **Use Case**              | A description of a user-system interaction to achieve a goal                  |
+| **User Story**            | A brief, informal requirements statement from a user's perspective            |
+| **Validation**            | Confirming the system meets stakeholder needs                                 |
+| **Verification**          | Confirming the system matches the specification                               |
+| **Velocity**              | The amount of work a team completes per sprint                                |
+| **Walkthrough**           | An informal review where the author presents work to a group                  |
+| **Wireframe**             | A low-fidelity visual representation of a UI layout                           |
+
+---
+
+# 🎯 Course Summary & Learning Path
+
+```
+BEGINNER PATH
+    Lesson 1.1 → 1.2 → 1.3 (Foundations)
+    Lesson 2.1 → 2.2 → 2.3 (Types of Requirements)
+    Lesson 3.1 → 3.2 (Stakeholders)
+
+INTERMEDIATE PATH
+    Lesson 4.1 → 4.5 (Elicitation Techniques)
+    Lesson 5.1 → 5.3 (Documentation)
+    Lesson 6.1 → 6.2 (Use Cases & User Stories)
+    Lesson 7.1 → 7.4 (Analysis & Modelling)
+
+ADVANCED PATH
+    Lesson 8.1 → 8.3 (Validation & Verification)
+    Lesson 9.1 → 9.3 (Management & Traceability)
+    Lesson 10.1 → 10.3 (Agile RE)
+    Lesson 11.1 → 11.2 (Large-Scale Systems)
+    Lesson 12.1 → 12.4 (Tools, Standards & Career)
+```
+
+---
+
+> **Next Steps:** After completing this course, consider:
+>
+> 1. Pursuing the **IREB CPRE Foundation** certification for formal recognition
+> 2. Practicing on real projects — even personal or open-source projects
+> 3. Reading **"Software Requirements" by Karl Wiegers** (the definitive practitioner's guide)
+> 4. Exploring the **BABOK Guide** published by IIBA
+> 5. Building hands-on experience with **JIRA**, **Confluence**, and **draw.io**
+
+---
