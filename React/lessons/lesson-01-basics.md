@@ -7,11 +7,11 @@ Imagine building a **real-time notification app** with vanilla JavaScript:
 ```javascript
 // Vanilla JS - Complex, error-prone, hard to maintain
 function updateNotifications(data) {
-  const notifList = document.getElementById('notifications');
-  notifList.innerHTML = ''; // Clear all
-  
-  data.forEach(notif => {
-    const li = document.createElement('li');
+  const notifList = document.getElementById("notifications");
+  notifList.innerHTML = ""; // Clear all
+
+  data.forEach((notif) => {
+    const li = document.createElement("li");
     li.innerHTML = `
       <h3>${notif.title}</h3>
       <p>${notif.message}</p>
@@ -28,6 +28,7 @@ function deleteNotif(id) {
 ```
 
 **Problems:**
+
 - 🔴 Manually managing DOM updates (error-prone)
 - 🔴 State scattered everywhere (hard to track)
 - 🔴 Hard to reuse notification logic
@@ -42,12 +43,12 @@ function NotificationApp() {
   const [notifications, setNotifications] = useState([]);
 
   const deleteNotif = (id) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
   return (
     <ul>
-      {notifications.map(notif => (
+      {notifications.map((notif) => (
         <Notification
           key={notif.id}
           {...notif}
@@ -60,6 +61,7 @@ function NotificationApp() {
 ```
 
 **Benefits:**
+
 - ✅ Just describe what you want, React handles the DOM
 - ✅ State is clear and centralized
 - ✅ Logic is reusable (`<Notification />` component)
@@ -71,6 +73,7 @@ function NotificationApp() {
 ## 🎯 **Real-World Examples Where React Shines**
 
 ### 1. **Netflix-like Streaming Platform**
+
 - Complex, interactive UI with smooth animations
 - Real-time updates (watch progress, recommendations)
 - Reusable components (movie cards, player, sidebar)
@@ -78,6 +81,7 @@ function NotificationApp() {
 - **React**: Components handle their own logic, state updates trigger automatic UI updates
 
 ### 2. **Figma-like Design Tool**
+
 - Hundreds of UI elements updating in real-time
 - Undo/redo functionality
 - Collaborative features
@@ -85,6 +89,7 @@ function NotificationApp() {
 - **React**: Component state naturally represents canvas state, and React efficiently updates only what changed
 
 ### 3. **Slack-like Chat Application**
+
 - Real-time messaging
 - Search, filtering, notifications
 - Sidebar with nested conversations
@@ -92,6 +97,7 @@ function NotificationApp() {
 - **React**: Virtual DOM ensures efficient updates, components can be reused for different message types
 
 ### 4. **E-commerce Dashboard (like Shopify)**
+
 - Multiple filters, sorting, pagination
 - Real-time inventory updates
 - Product card reuse across pages
@@ -102,28 +108,30 @@ function NotificationApp() {
 
 ## 🏆 **React vs Vanilla JS: Side by Side**
 
-| Feature | Vanilla JS | React |
-|---------|-----------|-------|
-| **DOM Manipulation** | Manual (`getElementById`, `appendChild`, etc.) | Automatic (Virtual DOM) |
-| **State Management** | Variables scattered everywhere | Centralized with `useState`, `useReducer` |
-| **Reusability** | Copy-paste code or complex patterns | Build components, reuse anywhere |
-| **Performance** | You must optimize manually | Built-in optimizations (diffing, memoization) |
-| **Debugging** | Hard to track where state changed | Clear data flow, easy to trace issues |
-| **Learning Curve** | Everything must be learned separately | Learn once, patterns work everywhere |
-| **Scalability** | Brittle as app grows | Scales elegantly to large apps |
-| **Maintainability** | Hard for teams (no conventions) | Standard patterns, predictable structure |
-| **Re-render Logic** | You decide when to update | React decides intelligently |
+| Feature              | Vanilla JS                                     | React                                         |
+| -------------------- | ---------------------------------------------- | --------------------------------------------- |
+| **DOM Manipulation** | Manual (`getElementById`, `appendChild`, etc.) | Automatic (Virtual DOM)                       |
+| **State Management** | Variables scattered everywhere                 | Centralized with `useState`, `useReducer`     |
+| **Reusability**      | Copy-paste code or complex patterns            | Build components, reuse anywhere              |
+| **Performance**      | You must optimize manually                     | Built-in optimizations (diffing, memoization) |
+| **Debugging**        | Hard to track where state changed              | Clear data flow, easy to trace issues         |
+| **Learning Curve**   | Everything must be learned separately          | Learn once, patterns work everywhere          |
+| **Scalability**      | Brittle as app grows                           | Scales elegantly to large apps                |
+| **Maintainability**  | Hard for teams (no conventions)                | Standard patterns, predictable structure      |
+| **Re-render Logic**  | You decide when to update                      | React decides intelligently                   |
 
 ---
 
 ## 📊 **Performance Reality**
 
 **Vanilla JS with 1000 list items:**
+
 - Update one item = full page re-render
 - Causes flickering, jank, battery drain
 - Takes 50+ ms per update
 
 **React with 1000 list items:**
+
 - Update one item = only that item re-renders
 - Smooth, efficient
 - Takes 2-5 ms per update (10x faster!)
@@ -131,6 +139,7 @@ function NotificationApp() {
 The Virtual DOM + diffing algorithm is React's superpower.
 
 ---
+
 Excellent — understanding **key theoretical terms** like _Single Source of Truth_, _Virtual DOM_, _One-way Data Flow_, etc., gives you the _core intuition_ behind how React actually works.
 
 Let’s go over all the **fundamental React concepts** that form the _theoretical backbone_ of the library 👇
