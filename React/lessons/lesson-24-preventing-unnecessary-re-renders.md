@@ -1,4 +1,4 @@
-````markdown
+
 # Lesson 24 — Preventing unnecessary re-renders (parent/child cases)
 
 Estimated time: 2–3 hours (read + refactor exercises)
