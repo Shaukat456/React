@@ -1,4 +1,3 @@
-
 # Lesson 24 — Preventing unnecessary re-renders (parent/child cases)
 
 Estimated time: 2–3 hours (read + refactor exercises)
@@ -33,30 +32,31 @@ Focus: reduce the cases where renders happen without producing visible changes.
 
 Problem:
 
-```jsx
 const Child = React.memo(({ onSelect }) => {
-  // ...expensive render
-  return <button onClick={() => onSelect(1)}>Pick</button>;
+// ...expensive render
+return <button onClick={() => onSelect(1)}>Pick</button>;
 });
 
 function Parent() {
-  const [count, setCount] = useState(0);
-  const onSelect = (id) => console.log(id); // new function each render
-  return (
-    <>
-      <button onClick={() => setCount((c) => c + 1)}>Inc {count}</button>
-      <Child onSelect={onSelect} />
-    </>
-  );
+const [count, setCount] = useState(0);
+const onSelect = (id) => console.log(id); // new function each render
+return (
+<>
+<button onClick={() => setCount((c) => c + 1)}>Inc {count}</button>
+<Child onSelect={onSelect} />
+</>
+);
 }
+
 ```
-````
+
+```
 
 Fix: stabilize the handler with `useCallback` so `React.memo` can skip child re-render.
 
-```jsx
 const onSelect = useCallback((id) => console.log(id), []);
-```
+
+````
 
 Notes:
 
@@ -73,7 +73,7 @@ Problem:
 const Row = React.memo(({ style }) => <div style={style}>Row</div>);
 // ...
 <Row style={{ padding: 8 }} />; // new object each render
-```
+````
 
 Fix: memoize the object or lift it to a constant.
 
@@ -99,7 +99,7 @@ Fix: memoize provider value; consider splitting frequently-changing parts.
 ```jsx
 const authValue = useMemo(
   () => ({ user, login, logout }),
-  [user, login, logout]
+  [user, login, logout],
 );
 <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;
 ```
