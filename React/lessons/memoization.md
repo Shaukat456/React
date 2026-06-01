@@ -61,9 +61,9 @@ fastSquare(5); // "Cache hit!" → 25 (instant!)
 fastSquare(9); // "Computing..." → 81
 ```
 
-The `cache` is just a plain object. The key is a serialized version of the arguments. The value is the result. That's it. Everything else is an extension of this idea.
+The `cache` is just a plain object. The key is a of the arguments. The value is the result. That's it. Everything else is an extension of this idea.
 
----
+## Serialized Version Definition: Translating an in-memory data structure (object) into a portable format (e.g., JSON, XML, or binary)
 
 ### 2.2 Real World Example: Fibonacci
 
